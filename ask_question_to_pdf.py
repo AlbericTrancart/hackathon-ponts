@@ -98,10 +98,10 @@ def ask_question_to_pdf(question):
     ]
     return gpt3_completion(conversation)
 
-conversation = [
-    {"role": "user", "content": "Quel pays est le plus densément peuplé ?"}
-]
+def get_question_from_pdf():
+    conversation = [
+    {"role": "user", "content": "Pose moi une question aléatoire sur ce document" + str(document)}
+    ]
+    return gpt3_completion(conversation)
 
-question = "résume le texte"
-response = ask_question_to_pdf(question)
-print("Réponse de GPT-3 avec le document:", response)
+print(get_question_from_pdf())

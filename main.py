@@ -15,3 +15,8 @@ def hello_world():
 def handlePrompt():
     answer = ask_question_to_pdf.ask_question_to_pdf(request.form['prompt'])
     return {'answer': answer}
+
+@app.route('/question', methods=['GET'])
+def handleQuestionClick():
+    question = ask_question_to_pdf.get_question_from_pdf()
+    return {'answer': question}

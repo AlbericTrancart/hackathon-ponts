@@ -34,21 +34,26 @@
         />
 
         <button type="submit" class="button" id="submit-button">Envoyer</button>
-
+        
         <script>
           // Fonction pour réagir au clic sur le bouton "Envoyer"
-          document.getElementById("submit").addEventListener("click", function() {
-              // Récupérer la question saisie par l'utilisateur
-              var question = document.getElementById("question").value;
-              
-              // Effectuer ici l'appel à la fonction handlePrompt
-              handlePrompt(question);
+          document.getElementById("submit").addEventListener("keydown", function() {
+              if (event.key === 'Enter') {
+                // Récupérer la question saisie par l'utilisateur
+                var question = document.getElementById("question").value;
+                
+                // Effectuer ici l'appel à la fonction handlePrompt
+                handlePrompt(question);
+              }
           });
-      </script>
+        </script>
 
         <button type="button" class="button" id="question-button">
           Pose-moi une question !
         </button>
+
+        </script>
+
       </form>
 
       <script src="{{ url_for('static', filename='prompt.js') }}"></script>
