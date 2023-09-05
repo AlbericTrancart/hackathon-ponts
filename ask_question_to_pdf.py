@@ -106,7 +106,7 @@ def get_question_from_pdf():
 
 def correct_with_pdf(answer):
     conversation = [
-    {"role": "user", answer + "content": "Corrige ce que j'ai dit en te servant du document :"  + str(document)}
+    {"role": "user", "content": answer + "Corrige ce que j'ai dit en te servant du document :" + str(document)}
     ]
     return gpt3_completion(conversation)
 
