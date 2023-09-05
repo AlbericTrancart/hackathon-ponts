@@ -20,3 +20,8 @@ def handlePrompt():
 def handleQuestionClick():
     question = ask_question_to_pdf.get_question_from_pdf()
     return {'answer': question}
+
+@app.route('/prompt', methods=['POST'])
+def handlePrompt():
+    answer = ask_question_to_pdf.correct_with_pdf(request.form['prompt'])
+    return {'answer': answer}
