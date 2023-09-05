@@ -11,5 +11,5 @@ def hello_world():
 
 @app.route('/prompt', methods=['POST'])
 def handlePrompt():
-    prompt = request.form['prompt']
-    return {'answer': prompt}
+    answer = ask_question_to_pdf(request.form['prompt'])
+    return {'answer': answer}
