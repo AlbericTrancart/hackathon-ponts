@@ -2,6 +2,8 @@ const promptForm = document.getElementById("prompt-form");
 const submitButton = document.getElementById("submit-button");
 const questionButton = document.getElementById("question-button");
 const messagesContainer = document.getElementById("messages-container");
+const textForm = document.getElementById("text-form");
+const textButton = document.getElementById("text-button");
 
 const appendHumanMessage = (message) => {
   const humanMessageElement = document.createElement("div");
@@ -71,3 +73,32 @@ const handleQuestionClick = async (event) => {
 };
 
 questionButton.addEventListener("click", handleQuestionClick);
+
+const handleText = async (event) => {
+  event.preventDefault();
+  // Parse form data in a structured object
+  const data = new FormData(event.target);
+  promptForm.reset();
+
+  let url = "/text";
+  if (questionButton.dataset.question !== undefined) {
+    url = "/answer";
+    data.append("question", questionButton.dataset.question);
+    delete questionButton.dataset.question;
+    questionButton.classList.remove("hidden");
+    submitButton.innerHTML = "Message";
+  }
+
+  appendHumanMessage(data.get("text"));
+
+  await appendAIMessage(async () => {
+    const response = await fetch(url, {
+      method: "POST",
+      body: data,
+    });
+    const result = await response.json();
+    return result.answer;
+  });
+};
+
+textForm.addEventListener("submit", handleText);
