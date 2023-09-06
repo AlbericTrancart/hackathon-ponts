@@ -12,6 +12,14 @@ const appendHumanMessage = (message) => {
   messagesContainer.appendChild(humanMessageElement);
 };
 
+const appendHiddenMessage = (message) => {
+  const humanMessageElement = document.createElement("div");
+  humanMessageElement.classList.add("message", "message-human");
+  humanMessageElement.innerHTML = "Texte en cours d'enregistrement";
+  messagesContainer.appendChild(humanMessageElement);
+};
+
+
 const appendAIMessage = async (messagePromise) => {
   // Add a loader to the interface
   const loaderElement = document.createElement("div");
@@ -89,7 +97,7 @@ const handleText = async (event) => {
     submitButton.innerHTML = "Message";
   }
 
-  appendHumanMessage(data.get("text"));
+  appendHiddenMessage(data.get("text"));
 
   await appendAIMessage(async () => {
     const response = await fetch(url, {

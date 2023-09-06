@@ -36,4 +36,4 @@ def handleAnswer():
 
 @app.route('/text', methods=['POST'])
 def handleText():
-    return {'answer': "Votre texte a été enregistré"}
+    return {'answer': "Votre texte a bien été enregistré"}
