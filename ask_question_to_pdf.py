@@ -95,26 +95,21 @@ def gpt3_completion(messages):
 
 
 def ask_question_to_pdf(question):
-    conversation = [
-    {"role": "user", "content": str(document) + question}
-    ]
+    conversation = [{"role": "user", "content": str(document) + question}]
     return gpt3_completion(conversation)
 
 
 def get_question_from_pdf():
-    conversation = [
-    {"role": "user", "content": "Pose moi une nouvelle question aléatoire et "
-     + "précise sur ce document ou sur l'ecole des ponts"
-     + str(document)}
-    ]
+    conversation = [{"role": "user", 
+                     "content": "Pose moi une nouvelle question aléatoire et "
+                     + "précise sur ce document ou sur l'ecole des ponts"
+                     + str(document)}]
     return gpt3_completion(conversation)
 
 
 def correct_with_pdf(answer, question):
-    conversation = [
-    {"role": "user", "content": "La question était :" + question 
-     + " et vous avez répondu" + answer 
-     + ", est-ce que c'est cohérent avec le document suivant :" + str(document)
-     + "et avec d'autres sources ?"}
-    ]
+    conversation = [{"role": "user", "content": "La question était :"
+                     + question + " et vous avez répondu" + answer
+                     + ", est-ce que c'est cohérent avec le document suivant :"
+                     + str(document) + "et avec d'autres sources ?"}]
     return gpt3_completion(conversation)
