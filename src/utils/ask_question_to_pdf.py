@@ -39,18 +39,6 @@ def read_pdf(filename):
 
 
 def split_text(text, chunk_size=5000):
-    """
-    Splits the given text into chunks of approximately the specified chunk size.
-
-    Args:
-    text (str): The text to split.
-
-    chunk_size (int): The desired size of each chunk (in characters).
-
-    Returns:
-    List[str]: A list of chunks, each of approximately the specified chunk size.
-    """
-
     chunks = []
     current_chunk = StringIO()
     current_size = 0
