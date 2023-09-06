@@ -100,14 +100,14 @@ def ask_question_to_pdf(question):
 
 def get_question_from_pdf():
     conversation = [
-    {"role": "user", "content": "Pose moi une question aléatoire sur ce document" + str(document)}
+    {"role": "user", "content": "Pose moi une nouvelle question aléatoire et précise sur ce document ou sur l'ecole des ponts" 
+     + str(document)}
     ]
     return gpt3_completion(conversation)
 
-def correct_with_pdf(answer):
+def correct_with_pdf(answer, question):
     conversation = [
-    {"role": "user", "content": answer + "Corrige ce que j'ai dit en te servant du document :" + str(document)}
+    {"role": "user", "content": "La question était :" + question + " et vous avez répondu" + answer + 
+     ", est-ce que c'est cohérent avec le document suivant :" + str(document) + "et avec d'autres sources ?"}
     ]
     return gpt3_completion(conversation)
-
-print(get_question_from_pdf())

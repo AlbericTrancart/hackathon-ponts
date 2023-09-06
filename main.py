@@ -5,7 +5,6 @@ import ask_question_to_pdf
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def hello_world():
     return render_template('index.html', name=__name__)
@@ -22,6 +21,6 @@ def handleQuestionClick():
     return {'answer': question}
 
 @app.route('/answer', methods=['POST'])
-def handlePrompt():
-    answer = ask_question_to_pdf.correct_with_pdf(request.form['answer'])
-    return {'answer': answer}
+def handleAnswer():
+    correction = ask_question_to_pdf.correct_with_pdf(request.form['prompt'],request.form['question'])
+    return {'answer': correction}
