@@ -1,10 +1,10 @@
 :root {
-    --body-background-color: #f5f6f8;
-    --main-background-color: #ffffff;
-    --main-color: #2a303b;
+    --body-background-color: #6284c6;
+    --main-background-color: #a4b8e1;
+    --main-color: #000000;
     --max-body-width: 700px;
-    --border-color: #cccccc;
-    --secondary-color: #fff6d3;
+    --border-color: #ffffff;
+    --secondary-color: #04ac0a;
     --loader-bullet-size: 6px;
   }
   
@@ -18,7 +18,7 @@
     margin: 0;
     font-family: sans-serif;
   }
-  
+
   .main-container {
     max-width: var(--max-body-width);
     min-height: 100vh;
