@@ -85,8 +85,6 @@ document = read_pdf(filename)
 chunks = split_text(document)
 
 def gpt3_completion(question):
-    
-
     x=openai.ChatCompletion.create(
     model="gpt-3.5-turbo",
     messages=[
