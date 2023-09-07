@@ -1,24 +1,21 @@
 from flask import Flask
 from flask import render_template
-from flask import request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
+from flask import request
 from werkzeug.utils import secure_filename
+from flask_sqlalchemy import SQLAlchemy
 import os
 import ask_question_to_pdf
-app = Flask(__name__)
 
-# create the extension
+
+UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), "uploads")
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+
 db = SQLAlchemy()
-# create the app
-app = Flask(__name__)
-# configure the SQLite database, relative to the app instance folder
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
-# initialize the app with the extension
-db.init_app(app)
 
-UPLOAD_FOLDER = '/uploads'
-ALLOWED_EXTENSIONS = {'pdf'}
+app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+db.init_app(app)
 
 
 class Text(db.Model):
@@ -29,19 +26,17 @@ class Text(db.Model):
 with app.app_context():
     db.create_all()
 
-filename = os.path.join(os.path.dirname(__file__), "filename.pdf")
-document = ask_question_to_pdf.read_pdf(filename)
-
 
 @app.route('/')
 def hello_world():
-    try:
-        doc = db.get_or_404(Text, 0)
-        if doc.text != document:
-            doc.text = document
-            db.session.commit()
-    except:
-        pass
+    filename = os.path.join(os.path.dirname(__file__), "filename.pdf")
+    document = ask_question_to_pdf.read_pdf(filename)
+    doc = Text.query.get(0)
+    if doc is not None:
+        db.session.delete(doc)
+        db.session.commit()
+    db.session.add(Text(id=0, text=document))
+    db.session.commit()
     return render_template('index.html', name=__name__)
 
 
@@ -80,11 +75,13 @@ def handleText():
 @app.route('/pdf', methods=['POST'])
 def uploadPdf():
     if "pdfUpload" in request.files:
-        file = request.files['pdfUpload']
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        upfile = request.files['pdfUpload']
+        upfilename = secure_filename(upfile.filename)
+        upfile.save(os.path.join(app.config['UPLOAD_FOLDER'], upfilename))
         doc = db.get_or_404(Text, 0)
-        doc.text = ask_question_to_pdf.read_pdf(file.filename)
+        upfilename = os.path.join(os.path.dirname(__file__),
+                                  "uploads", upfilename)
+        doc.text = ask_question_to_pdf.read_pdf(upfilename)
         db.session.commit()
         titre = ask_question_to_pdf.get_title_from_pdf(doc.text)
     return {'answer': "Votre texte (" + titre + ") a bien été enregistré"}

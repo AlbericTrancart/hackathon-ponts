@@ -4,7 +4,8 @@ const questionButton = document.getElementById("question-button");
 const messagesContainer = document.getElementById("messages-container");
 const textForm = document.getElementById("text-form");
 const textButton = document.getElementById("text-button");
-const pdfButton= document.getElementById("pdf");
+const pdfButton= document.getElementById("pdfButton");
+const pdfForm = document.getElementById("pdfForm");
 
 const appendHumanMessage = (message) => {
   const humanMessageElement = document.createElement("div");
@@ -138,4 +139,4 @@ const uploadPdf = async (event) => {
   });
 };
 
-pdfButton.addEventListener("submit", uploadPdf);
+pdfForm.addEventListener("submit", uploadPdf);
