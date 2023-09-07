@@ -4,6 +4,7 @@ const questionButton = document.getElementById("question-button");
 const messagesContainer = document.getElementById("messages-container");
 const textForm = document.getElementById("text-form");
 const textButton = document.getElementById("text-button");
+const pdfButton= document.getElementById("pdf");
 
 const appendHumanMessage = (message) => {
   const humanMessageElement = document.createElement("div");
@@ -15,7 +16,7 @@ const appendHumanMessage = (message) => {
 const appendHiddenMessage = (message) => {
   const humanMessageElement = document.createElement("div");
   humanMessageElement.classList.add("message", "message-human");
-  humanMessageElement.innerHTML = "Texte en cours d'enregistrement";
+  humanMessageElement.innerHTML = "Document en cours d'enregistrement";
   messagesContainer.appendChild(humanMessageElement);
 };
 
@@ -86,7 +87,7 @@ const handleText = async (event) => {
   event.preventDefault();
   // Parse form data in a structured object
   const data = new FormData(event.target);
-  promptForm.reset();
+  textForm.reset();
 
   let url = "/text";
   if (questionButton.dataset.question !== undefined) {
@@ -110,3 +111,31 @@ const handleText = async (event) => {
 };
 
 textForm.addEventListener("submit", handleText);
+
+const uploadPdf = async (event) => {
+  event.preventDefault();
+  // Parse form data in a structured object
+  const data = new FormData(event.target);
+
+  let url = "/pdf";
+  if (questionButton.dataset.question !== undefined) {
+    url = "/answer";
+    data.append("question", questionButton.dataset.question);
+    delete questionButton.dataset.question;
+    questionButton.classList.remove("hidden");
+    submitButton.innerHTML = "Message";
+  }
+
+  appendHiddenMessage(data.get("text"));
+
+  await appendAIMessage(async () => {
+    const response = await fetch(url, {
+      method: "POST",
+      body: data,
+    });
+    const result = await response.json();
+    return result.answer;
+  });
+};
+
+pdfButton.addEventListener("submit", uploadPdf);

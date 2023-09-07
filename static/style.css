@@ -1,10 +1,10 @@
 :root {
-    --body-background-color: #6284c6;
-    --main-background-color: #a4b8e1;
+    --body-background-color: #ffffff;
+    --main-background-color: #e3e3e3;
     --main-color: #000000;
-    --max-body-width: 900px;
-    --border-color: #ffffff;
-    --secondary-color: #04ac0a;
+    --max-body-width: 1000px;
+    --border-color: #000000;
+    --secondary-color: #bde2be;
     --loader-bullet-size: 6px;
   }
   
@@ -16,7 +16,7 @@
     background-color: var(--body-background-color);
     padding: 0;
     margin: 0;
-    font-family: sans-serif;
+    font-family: 'Merriweather', sans-serif;;
   }
 
   .main-container {
@@ -33,7 +33,10 @@
   }
   
   .header-title {
-    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    margin-top: -30px;
   }
   
   .messages-container {
@@ -66,12 +69,33 @@
     padding: 20px;
     border-top: 1px solid var(--border-color);
   }
+
+  .text-container {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--max-body-width);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--main-background-color);
+    padding: 20px;
+    border-top : 1px solid var(--border-color);
+    border-bottom : 1px solid var(--border-color);
+  }
   
   .prompt-label {
     font-weight: bold;
   }
   
   .prompt-input {
+    flex-grow: 1;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 5px;
+  }
+
+  .text-input {
     flex-grow: 1;
     border: 1px solid var(--border-color);
     border-radius: 5px;
