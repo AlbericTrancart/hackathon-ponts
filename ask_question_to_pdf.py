@@ -4,6 +4,7 @@ import fitz
 import openai
 from dotenv import load_dotenv
 from nltk.tokenize import sent_tokenize
+from flask import request
 
 load_dotenv()
 
@@ -90,7 +91,7 @@ def gpt3_completion(question):
     return reponse["choices"][0]["message"]["content"]
 
 
-la_question = "qui es-tu?"
+# la_question = "qui es-tu?"
 
 
 # text = "Les voitures électriques offrent plusieurs avantages par rapport
@@ -145,7 +146,7 @@ def gpt3_question():
             }
         ],
     )
-    la_question = question_cree
+    # la_question = question_cree
     return question_cree["choices"][0]["message"]["content"]
 
 
@@ -159,7 +160,7 @@ def gpt3_answer(reponse):
                 + "en te basant uniquement sur ce texte, est-ce que"
                 + reponse
                 + "répond à la question"
-                + la_question
+                + request.form["question"]
                 + "? Tu répondras vrai si la réponse est vraie et faux si elle est fausse, en argumentant.",
             }
         ],
