@@ -5,6 +5,9 @@ import openai
 from dotenv import load_dotenv
 from nltk.tokenize import sent_tokenize
 
+
+text = "Les voitures électriques offrent plusieurs avantages par rapport aux voitures à moteur thermique : 1. **Zéro émissions locales :** Les voitures électriques ne produisent pas d'émissions d'échappement locales, réduisant ainsi la pollution de l'air et les effets sur la santé. 2. **Moins de dépendance aux combustibles fossiles :** Les voitures électriques utilisent l'électricité, qui peut provenir de sources renouvelables comme le soleil et le vent, réduisant la dépendance aux combustibles fossiles.3. **Coûts de fonctionnement réduits :** Les voitures électriques ont moins de pièces mobiles et nécessitent moins d'entretien par rapport aux voitures à moteur thermique, ce qui peut réduire les coûts à long terme. 4. **Performance instantanée :** Les voitures électriques offrent un couple élevé dès le départ, ce qui signifie une accélération rapide et fluide sans la nécessité de changer de vitesses. 5. **Conduite silencieuse :** Les moteurs électriques sont beaucoup plus silencieux que les moteurs thermiques, offrant une expérience de conduite plus paisible. 6. **Amélioration de l'efficacité énergétique :** Les voitures électriques convertissent plus efficacement l'énergie électrique en mouvement par rapport aux moteurs à combustion interne. 7. **Réduction des émissions de gaz à effet de serre :** Même en tenant compte de l'émission de CO2 liée à la production d'électricité, les voitures électriques ont tendance à produire moins d'émissions de gaz à effet de serre sur leur cycle de vie par rapport aux voitures à essence. 8. **Innovation technologique :** Les voitures électriques stimulent le développement de nouvelles technologies, telles que les batteries plus performantes et les systèmes de recharge avancés. 9. **Réduction du bruit urbain :** La diminution du bruit des véhicules électriques contribue à réduire le niveau de bruit dans les zones urbaines. 10. **Subventions et incitations :** Dans de nombreux endroits, les voitures électriques bénéficient d'incitations gouvernementales, telles que des réductions fiscales ou des voies réservées. Il est important de noter que la transition vers les voitures électriques implique également des défis, tels que l'infrastructure de recharge en expansion, la gestion des matériaux des batteries et l'autonomie limitée par rapport aux voitures à essence sur de longs trajets. Cependant, les avantages en matière d'environnement et d'efficacité continuent de renforcer l'attrait des voitures électriques pour l'avenir de la mobilité."
+
 load_dotenv()
 
 
@@ -39,6 +42,19 @@ def read_pdf(filename):
 
 
 def split_text(text, chunk_size=5000):
+
+    """
+    Splits the given text into chunks of approximately the specified chunk size.
+
+    Args:
+    text (str): The text to split.
+
+    chunk_size (int): The desired size of each chunk (in characters).
+
+    Returns:
+    List[str]: A list of chunks, each of approximately the specified chunk size.
+    """
+
     chunks = []
     current_chunk = StringIO()
     current_size = 0
@@ -69,3 +85,40 @@ def split_text(text, chunk_size=5000):
 filename = os.path.join(os.path.dirname(__file__), "filename.pdf")
 document = read_pdf(filename)
 chunks = split_text(document)
+
+def gpt3_completion(question):
+    x=openai.ChatCompletion.create(
+    model="gpt-3.5-turbo",
+    messages=[
+            {"role": "system", "content": "tu es un professeur"},
+            {"role": "user", "content": question},
+        ]
+    )
+
+    return(x['choices'][0]['message']['content'])
+
+def ask_question_to_pdf(question):
+    return(gpt3_completion(question+document+" tu repondras a cette question en t'appuyant uniquement du docuement"))
+
+def gpt3_question():
+    x=openai.ChatCompletion.create(
+    model="gpt-3.5-turbo",
+    messages=[
+         #   {"role": "system", "content": "tu es un professeur"},
+         #   {"role": "user", "content": "pose moi une question sur le document"},
+        {"role": "system", "content": document + "pose moi une question sur le document"},
+        ]
+    )
+    return(x['choices'][0]['message']['content'])
+
+def gpt3_answer(reponse,la_question):
+    x=openai.ChatCompletion.create(
+    model="gpt-3.5-turbo",
+    messages=[
+         #   {"role": "system", "content": "tu es un professeur"},
+         #   {"role": "user", "content": "pose moi une question sur le document"},
+        {"role": "system", "content": document + " : en te basant uniquement sur ce texte, est ce que " + reponse + " repond à la question : " +la_question+ " ? Tu repondras par vrai si la reponse est bonne et faux si elle est fausse"},
+        ]
+    )
+    return(x['choices'][0]['message']['content'])
+
