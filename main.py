@@ -66,8 +66,7 @@ def handleAnswer():
 @app.route('/text', methods=['POST'])
 def handleText():
     doc = db.get_or_404(Text, 0)
-    db.session.delete(doc)
-    text = Text(id=0, text=str(request.form['text']))
-    db.session.add(text)
+    doc.text = request.form['text']
     db.session.commit()
-    return {'answer': "Votre texte a bien été enregistré"}
+    titre = ask_question_to_pdf.get_title_from_pdf(doc.text)
+    return {'answer': "Votre texte (" + titre + ") a bien été enregistré"}

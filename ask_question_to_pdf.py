@@ -100,7 +100,7 @@ def ask_question_to_pdf(question, document):
 
 
 def get_question_from_pdf(document):
-    conversation = [{"role": "user", 
+    conversation = [{"role": "user",
                      "content": "Pose une nouvelle question aléatoire et "
                      + "précise sur ce document ou sur l'ecole des ponts"
                      + str(document)}]
@@ -112,4 +112,11 @@ def correct_with_pdf(answer, question, document):
                      + question + " et il a été répondu" + answer
                      + ", est-ce que c'est cohérent avec le document suivant :"
                      + str(document)}]
+    return gpt3_completion(conversation)
+
+
+def get_title_from_pdf(document):
+    conversation = [{"role": "user",
+                     "content": str(document) + " Donne un titre à ce document"
+                     + " et ne renvois que ce titre en sortie"}]
     return gpt3_completion(conversation)
