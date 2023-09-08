@@ -7,6 +7,14 @@
     --secondary-color: #bde2be;
     --loader-bullet-size: 6px;
   }
+
+  .dark-mode {
+    --body-background-color: rgb(80, 76, 76);
+    --main-background-color: black;
+    --main-color: white;
+    ;
+  
+  }
   
   * {
     box-sizing: border-box;
@@ -107,13 +115,17 @@
     padding: 5px;
     border-radius: 5px;
     background-color: var(--main-background-color);
+    color: var(--main-color)
   }
   
   .button:hover,
   .button:active {
     background-color: var(--body-background-color);
+    color: var(--main-color); 
     cursor: pointer;
   }
+
+  
   
   .hidden {
     display: none;

@@ -6,6 +6,8 @@ const textForm = document.getElementById("text-form");
 const textButton = document.getElementById("text-button");
 const pdfButton= document.getElementById("pdfButton");
 const pdfForm = document.getElementById("pdfForm");
+const darkModeButton = document.getElementById("darkModeButton");
+const body = document.body;
 
 const appendHumanMessage = (message) => {
   const humanMessageElement = document.createElement("div");
