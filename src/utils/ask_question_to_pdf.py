@@ -4,6 +4,7 @@ import fitz
 import openai
 from dotenv import load_dotenv
 from nltk.tokenize import sent_tokenize
+from openai import OpenAI
 
 load_dotenv()
 
@@ -69,3 +70,17 @@ def split_text(text, chunk_size=5000):
 filename = os.path.join(os.path.dirname(__file__), "filename.pdf")
 document = read_pdf(filename)
 chunks = split_text(document)
+
+
+client = OpenAI()
+
+
+def gpt3_completion(conversation: list[dict[str, str]]) -> str | None:
+    completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=conversation,  # type: ignore
+        max_tokens=300,
+        temperature=0.5,
+    )
+
+    return completion.choices[0].message.content
