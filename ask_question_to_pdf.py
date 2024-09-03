@@ -75,8 +75,8 @@ def split_text(text, chunk_size=5000):
 response = 0
 
 
-def gpt3_completion(question):
-    discussion.append({"role": "user", "content": question})
+def gpt3_completion(question, role="user"):
+    discussion.append({"role": role, "content": question})
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=discussion,
