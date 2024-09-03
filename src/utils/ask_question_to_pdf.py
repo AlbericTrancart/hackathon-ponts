@@ -20,7 +20,9 @@ client = openai.OpenAI()
 text = "pose moi une nouvelle question sur le texte sur les ponts-et-chaussées !"
 
 
-discussion = []
+discussion = [
+    {"role": "system", "content": "Le prochain texte est le cours qu'il faut apprendre"}
+]
 
 
 def read_pdf(filename):
@@ -72,7 +74,10 @@ def split_text(text, chunk_size=5000):
     return chunks
 
 
-response = 0
+for k in split_text(
+    read_pdf("/home/kenjichikhaoui/Desktop/hackathon-ponts/src/utils/filename.pdf")
+):
+    discussion.append({"role": "system", "content": k})
 
 
 def gpt3_completion(question, role="user"):
