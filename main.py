@@ -12,8 +12,8 @@ text = "pose moi une nouvelle question sur le texte sur les ponts-et-chaussées 
 
 
 @app.route("/")
-def hello_world():
-    return """<p>Hello, World!<p> <a href="/hello"> click here <a>"""
+def front_page(name=None):
+    return render_template("front_page.html", name=name)
 
 
 @app.route("/hello/")

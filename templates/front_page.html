@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <title>Ma page</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_1.css') }}" />
+</head>
+
+<body style="background-color:#fad104">
+    <main class="main-container">
+        <header class="header">
+            <h1 class="header-title">Bienvenu sur ChatGPT</h1>
+        </header>
+        <div class="center">
+            <button onclick="location.href='/hello/'" style="height:200px;width:200px" type="goto" class="button"
+                id="to_chat_gpt">Commencer</button>
+        </div>
+
+    </main>
+</body>
+
+</html>
