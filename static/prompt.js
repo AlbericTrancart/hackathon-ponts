@@ -2,6 +2,7 @@ const promptForm = document.getElementById("prompt-form");
 const submitButton = document.getElementById("submit-button");
 const questionButton = document.getElementById("question-button");
 const messagesContainer = document.getElementById("messages-container");
+const darkMode = document.getElementById("dark-button");
 
 const appendHumanMessage = (message) => {
   const humanMessageElement = document.createElement("div");
@@ -70,4 +71,17 @@ const handleQuestionClick = async (event) => {
   });
 };
 
+
+const handleDarkClick = async (event) => {
+  var stylesheet = document.getElementById('style')
+  if (stylesheet.getAttribute('href') === 'style.css') {
+    stylesheet.setAttribute('href', 'dark_style.css');
+    print("yes")
+  }
+  else {
+    stylesheet.setAttribute('href', 'style.css');
+  }
+};
+
 questionButton.addEventListener("click", handleQuestionClick);
+darkMode.addEventListener("click", handleDarkClick);
