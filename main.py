@@ -2,6 +2,8 @@ from flask import Flask
 from flask import render_template
 from flask import request
 
+from src.utils.ask_question_to_pdf import ask_question_to_pdf
+
 app = Flask(__name__)
 
 
@@ -12,4 +14,6 @@ def hello_world(name=None):
 
 @app.route("/prompt", methods=['POST'])
 def prompt():
-    return {"answer": request.form["prompt"]}
+    question = request.form['prompt']
+    answer = ask_question_to_pdf(question)
+    return {"answer": answer}
