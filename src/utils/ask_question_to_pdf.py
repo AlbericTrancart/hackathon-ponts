@@ -94,4 +94,3 @@ def gpt3_completion():
     message = response.choices[0].message.content
     return message
 
-gpt3_completion()
