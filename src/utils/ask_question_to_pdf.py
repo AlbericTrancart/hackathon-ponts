@@ -92,6 +92,6 @@ def gpt3_completion():
     )
 
     message = response.choices[0].message.content
-    print(message)
+    return message
 
 gpt3_completion()
