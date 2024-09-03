@@ -3,13 +3,12 @@ from flask import Flask
 from flask import request
 from ask_question_to_pdf import (
     gpt3_completion,
-    add_text_to_dialog,
-    initialise_discut,
-    input_question,
-    add_text_to_discussion,
 )
 
 app = Flask(__name__)
+
+
+text = "pose moi une nouvelle question sur le texte sur les ponts-et-chaussées !"
 
 
 @app.route("/")
@@ -20,20 +19,18 @@ def hello_world():
 @app.route("/hello/")
 @app.route("/hello/<name>")
 def hello(name=None):
-    initialise_discut()
     return render_template("index.html", name=name)
 
 
 @app.route("/question", methods=["GET"])
-def give_question():
-    input_question()
-    answer = gpt3_completion()
+def give_question(given_text=text):
+    answer = gpt3_completion(given_text)
     return {"answer": answer}
 
 
 @app.route("/prompt", methods=["POST"])
+@app.route("/answer", methods=["POST"])
 def return_prompt():
     input = request.form["prompt"]
-    add_text_to_discussion(input)
-    answer = gpt3_completion()
+    answer = gpt3_completion(input)
     return {"answer": answer}

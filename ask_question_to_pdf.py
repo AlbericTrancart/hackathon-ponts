@@ -15,6 +15,12 @@ def open_file(filepath):
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 openai.organization = os.getenv("OPENAI_ORGANIZATION")
+client = openai.OpenAI()
+
+text = "pose moi une nouvelle question sur le texte sur les ponts-et-chaussées !"
+
+
+discussion = []
 
 
 def read_pdf(filename):
@@ -66,25 +72,22 @@ def split_text(text, chunk_size=5000):
     return chunks
 
 
-client = openai.OpenAI()
-
 response = 0
 
 
-def gpt3_completion(mes):
+def gpt3_completion(question):
+    discussion.append({"role": "user", "content": question})
     response = client.chat.completions.create(
         model="gpt-4o-mini",
-        messages=mes,
+        messages=discussion,
     )
+    discussion.append(
+        {"role": "assistant", "content": response.choices[0].message.content}
+    )
+
     return response.choices[0].message.content
 
 
-print(gpt3_completion(1))
-
-[{"role": "system", "content": "You are a helpful assistant."}]
-
-# print(split_text(read_pdf("/home/kenjichikhaoui/
-# Desktop/hackathon-ponts/filename.pdf")))
 filename = os.path.join(os.path.dirname(__file__), "filename.pdf")
 document = read_pdf(filename)
 chunks = split_text(document)
