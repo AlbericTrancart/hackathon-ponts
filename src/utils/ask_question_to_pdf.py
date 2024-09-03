@@ -66,6 +66,25 @@ def split_text(text, chunk_size=5000):
     return chunks
 
 
+client = openai.OpenAI()
+
+response = 0
+
+
+def gpt3_completion(mes):
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=mes,
+    )
+    return response.choices[0].message.content
+
+
+print(gpt3_completion(1))
+
+[{"role": "system", "content": "You are a helpful assistant."}]
+
+# print(split_text(read_pdf("/home/kenjichikhaoui/
+# Desktop/hackathon-ponts/filename.pdf")))
 filename = os.path.join(os.path.dirname(__file__), "filename.pdf")
 document = read_pdf(filename)
 chunks = split_text(document)
