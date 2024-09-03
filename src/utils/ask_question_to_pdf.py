@@ -94,3 +94,8 @@ def gpt3_completion(question, role="user"):
 filename = os.path.join(os.path.dirname(__file__), "filename.pdf")
 document = read_pdf(filename)
 chunks = split_text(document)
+
+def validate_answer(question, role="user"):
+    discussion.append({"role": "system", "content": "Vérifie le prochain message"})
+    return gpt3_completion(question)
+    
