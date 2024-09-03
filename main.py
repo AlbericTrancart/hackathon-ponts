@@ -28,5 +28,5 @@ def question():
 @app.route("/answer", methods=["POST"])
 def answer():
     answer = request.form["prompt"]
-    GPTanswer = ask_question_to_pdf(answer)
-    return {"answer": GPTanswer}
+    gpt_answer = ask_question_to_pdf(answer)
+    return {"answer": gpt_answer}
