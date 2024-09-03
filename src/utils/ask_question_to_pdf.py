@@ -79,9 +79,7 @@ def gpt3_completion(prompt_user, model="gpt-3.5-turbo", max_tokens=150):
     message_history.append({"role": "user", "content": prompt_user})
 
     response = openai.ChatCompletion.create(
-        model=model,
-        messages=message_history,
-        max_tokens=max_tokens
+        model=model, messages=message_history, max_tokens=max_tokens
     )
 
     model_response = response.choices[0].message["content"].strip()
