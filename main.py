@@ -9,7 +9,7 @@ def hello():
     return render_template("index.html")
 
 
-@app.route('/prompt', methods=["POST", "GET"])
+@app.route("/prompt", methods=["POST", "GET"])
 def prompt():
     if request.method == "POST":
         ans = src.utils.ask_question_to_pdf.gpt3_completion(request.form["prompt"])

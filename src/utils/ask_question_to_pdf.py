@@ -89,5 +89,3 @@ def gpt3_completion(prompt_user, model="gpt-3.5-turbo", max_tokens=150):
     message_history.append({"role": "assistant", "content": model_response})
 
     return model_response
-
-
