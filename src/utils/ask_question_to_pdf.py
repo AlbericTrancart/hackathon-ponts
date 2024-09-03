@@ -71,7 +71,7 @@ filename = os.path.join(os.path.dirname(__file__), "filename.pdf")
 document = read_pdf(filename)
 chunks = split_text(document)
 
-message_history.append({"role": "user", "content":chunks[0]})
+message_history.append({"role": "user", "content": chunks[0]})
 
 def gpt3_completion(prompt_user, model="gpt-3.5-turbo", max_tokens=150):
     global message_history
@@ -84,7 +84,7 @@ def gpt3_completion(prompt_user, model="gpt-3.5-turbo", max_tokens=150):
         max_tokens=max_tokens
     )
 
-    model_response = response.choices[0].message['content'].strip()
+    model_response = response.choices[0].message["content"].strip()
 
     message_history.append({"role": "assistant", "content": model_response})
 

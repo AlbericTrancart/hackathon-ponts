@@ -3,13 +3,13 @@ import src.utils.ask_question_to_pdf
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route("/")
 def hello():
-    return render_template('index.html')
+    return render_template("index.html")
 
 @app.route('/prompt', methods=['POST', 'GET'])
 def prompt():
-    if request.method == 'POST':
+    if request.method == "POST":
         ans = src.utils.ask_question_to_pdf.gpt3_completion(request.form['prompt'])
         print(ans)
         s = jsonify({"answer": ans})
