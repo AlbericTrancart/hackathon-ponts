@@ -9,11 +9,24 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello_world(name=None):
-    return render_template('index.html', name=name)
+    return render_template("index.html", name=name)
 
 
-@app.route("/prompt", methods=['POST'])
+@app.route("/prompt", methods=["POST"])
 def prompt():
-    question = request.form['prompt']
+    question = request.form["prompt"]
     answer = ask_question_to_pdf(question)
     return {"answer": answer}
+
+
+@app.route("/question", methods=["GET"])
+def question():
+    answer = ask_question_to_pdf("Pose-moi une question sur le texte.")
+    return {"answer": answer}
+
+
+@app.route("/answer", methods=["POST"])
+def answer():
+    answer = request.form["prompt"]
+    GPTanswer = ask_question_to_pdf(answer)
+    return {"answer": GPTanswer}
