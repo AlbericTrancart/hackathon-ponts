@@ -74,9 +74,7 @@ def split_text(text, chunk_size=5000):
     return chunks
 
 
-for k in split_text(
-    read_pdf("/home/kenjichikhaoui/Desktop/hackathon-ponts/src/utils/filename.pdf")
-):
+for k in split_text(read_pdf("src/utils/filename.pdf")):
     discussion.append({"role": "system", "content": k})
 
 
