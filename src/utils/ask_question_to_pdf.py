@@ -82,4 +82,3 @@ def gpt3_completion(ppt, doc=document):
     print(response)
     return response.choices[0].message.content
     
-gpt3_completion("Peux-tu me résumer ce texte ?")
