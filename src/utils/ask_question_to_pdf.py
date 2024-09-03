@@ -66,6 +66,20 @@ def split_text(text, chunk_size=5000):
     return chunks
 
 
-filename = os.path.join(os.path.dirname(__file__), "filename.pdf")
+filename = os.path.join(os.path.dirname(__file__), "../../filename.pdf")
 document = read_pdf(filename)
 chunks = split_text(document)
+
+
+def gpt3_completion(ppt, doc=document):
+    client = openai.OpenAI()
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages = [{"role": "system", 
+                     "content": "Reponds aux questions en te basant sur le document suivant :"+doc},
+            {"role": "user", "content": ppt},],
+    )
+    print(response)
+    return response.choices[0].message.content
+    
+gpt3_completion("Peux-tu me résumer ce texte ?")
