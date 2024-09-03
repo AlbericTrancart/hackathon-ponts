@@ -67,11 +67,13 @@ def split_text(text, chunk_size=5000):
         chunks.append(current_chunk.getvalue())
     return chunks
 
+
 filename = os.path.join(os.path.dirname(__file__), "filename.pdf")
 document = read_pdf(filename)
 chunks = split_text(document)
 
 message_history.append({"role": "user", "content": chunks[0]})
+
 
 def gpt3_completion(prompt_user, model="gpt-3.5-turbo", max_tokens=150):
     global message_history
