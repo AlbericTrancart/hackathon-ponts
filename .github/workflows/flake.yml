@@ -5,15 +5,23 @@ on: [push, pull_request]
 jobs:
   flake8-lint:
     runs-on: ubuntu-latest
-    name: Lint
+    name: Lint and Test
     steps:
       - name: Check out source repository
         uses: actions/checkout@v3
+
       - name: Set up Python environment
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
-      - name: flake8 Lint
+
+      - name: Install Nix
+        run: curl -L https://nixos.org/nix/install | sh
+
+      - name: Source Nix
+        run: . /home/runner/.nix-profile/etc/profile.d/nix.sh
+
+      - name: Run flake8 Lint
         uses: py-actions/flake8@v2
 
       - name: Run tests
