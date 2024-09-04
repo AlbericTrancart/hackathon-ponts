@@ -5,20 +5,20 @@ from src.utils import ask_question_to_pdf
 
 app = Flask(__name__)
 
-#@app.route("/")
-#def hello_world():
+# @app.route("/")
+# def hello_world():
 #    return "<p>Hello, World!</p>"
 
 
-@app.route('/')
+@app.route("/")
 def home():
-    return render_template('index.html')
+    return render_template("index.html")
 
 
 
-@app.route('/prompt', methods = ['POST'])
+@app.route("/prompt", methods = ["POST"])
 def bot_prompt():
-    if request.method == 'POST':
-        response = ask_question_to_pdf.gpt3_completion(request.form['prompt'])
+    if request.method == "POST":
+        response = ask_question_to_pdf.gpt3_completion(request.form["prompt"])
         return {"answer":response}
 

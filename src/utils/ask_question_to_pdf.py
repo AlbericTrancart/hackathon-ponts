@@ -75,10 +75,14 @@ def gpt3_completion(ppt, doc=document):
     client = openai.OpenAI()
     response = client.chat.completions.create(
         model="gpt-4o-mini",
-        messages = [{"role": "system", 
-                     "content": "Reponds aux questions en te basant sur le document suivant :"+doc},
-            {"role": "user", "content": ppt},],
+        messages=[
+            {
+                "role": "system",
+                "content": "Reponds aux questions en te basant sur le document suivant :"
+                + doc,
+            },
+            {"role": "user", "content": ppt},
+        ],
     )
     print(response)
     return response.choices[0].message.content
-    
