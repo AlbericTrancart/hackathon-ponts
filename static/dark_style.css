@@ -19,6 +19,15 @@ body {
   font-family: sans-serif;
 }
 
+ul {
+  list-style-type: none;
+  margin: 0;
+}
+
+li {
+  margin-top: 20px;
+}
+
 .main-container {
   max-width: var(--max-body-width);
   min-height: 100vh;
@@ -112,6 +121,11 @@ body {
   background-color: var(--main-color);
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
+
+.w3-sidebar {
+  position: fixed;
+}
+
 
 .loader div:nth-child(1) {
   left: calc(var(--loader-bullet-size) * 0.5);
