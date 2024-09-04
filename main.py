@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-import src.utils.ask_question_to_pdf
+import src.utils.ask_question_to_pdf as ask_q
 
 app = Flask(__name__)
 
@@ -13,7 +13,7 @@ def hello():
 def prompt():
     if request.method == "POST":
         req = request.form["prompt"]
-        ans = src.utils.ask_question_to_pdf.gpt3_completion(req)
+        ans = ask_q.gpt3_completion(req)
         print(ans)
         s = jsonify({"answer": ans})
         return s
