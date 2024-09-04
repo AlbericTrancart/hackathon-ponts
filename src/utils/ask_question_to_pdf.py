@@ -17,11 +17,16 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 openai.organization = os.getenv("OPENAI_ORGANIZATION")
 client = openai.OpenAI()
 
-text = "pose moi une nouvelle question sur le texte sur les ponts-et-chaussées !"
+text = """pose moi une nouvelle question 
+sur le texte sur les ponts-et-chaussées !"""
 
 
 discussion = [
-    {"role": "system", "content": "Le prochain texte est le cours qu'il faut apprendre"}
+    {
+        "role": "system",
+        "content": """Le prochain texte est le cours 
+     qu'il faut apprendre""",
+    }
 ]
 
 
@@ -95,7 +100,13 @@ filename = os.path.join(os.path.dirname(__file__), "filename.pdf")
 document = read_pdf(filename)
 chunks = split_text(document)
 
+
 def validate_answer(question, role="user"):
-    discussion.append({"role": "system", "content": "Vérifie le prochain message"})
+    discussion.append(
+        {
+            "role": "system",
+            "content": """Vérifie 
+                       le prochain message""",
+        }
+    )
     return gpt3_completion(question)
-    
