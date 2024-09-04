@@ -1,15 +1,14 @@
 from flask import render_template
 from flask import Flask
 from flask import request
-from flask import jsonify
-from src.utils.ask_question_to_pdf import (
-    gpt3_completion, validate_answer
-)
+
+# from flask import jsonify
+from src.utils.ask_question_to_pdf import gpt3_completion, validate_answer
 
 app = Flask(__name__)
 
 
-text = "pose moi une nouvelle question sur le texte sur les ponts-et-chaussées !"
+text = "pose moi une nouvelle question sur le texte sur les ponts-et-chaussées !"  # noqa: E501
 
 
 @app.route("/")
