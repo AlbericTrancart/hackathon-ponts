@@ -35,7 +35,8 @@ def give_question(given_text=text):
 def return_prompt():
     input = request.form["prompt"]
     add_information_historic(
-        """Vérifie que le prochain message est en rapport avec le texte du l'Ecole des Ponts"""
+        """Vérifie que le prochain message est en rapport avec le texte du
+        l'Ecole des Ponts"""
     )
     answer = gpt3_completion(input)
     return {"answer": answer}
@@ -45,7 +46,8 @@ def return_prompt():
 def return_answer():
     input = request.form["prompt"]
     add_information_historic(
-        """Vérifie que le prochain message est en rapport avec le texte du l'Ecole des Ponts"""
+        """Vérifie que le prochain message est en rapport avec le texte du
+        l'Ecole des Ponts"""
     )
     answer = validate_answer(input)
     return {"answer": answer}
