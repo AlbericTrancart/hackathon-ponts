@@ -1,3 +1,5 @@
+const converter = new showdown.Converter();  // To convert .md from GTP into .html
+
 const promptForm = document.getElementById("prompt-form");
 const submitButton = document.getElementById("submit-button");
 const questionButton = document.getElementById("question-button");
@@ -49,7 +51,7 @@ const handlePrompt = async (event) => {
       body: data,
     });
     const result = await response.json();
-    return result.answer;
+    return converter.makeHtml(result.answer);  // .md -> .html for prompt
   });
 };
 
@@ -61,7 +63,7 @@ const handleQuestionClick = async (event) => {
       method: "GET",
     });
     const result = await response.json();
-    const question = result.answer;
+    const question = converter.makeHtml(result.answer);  // md. -> .html for question
 
     questionButton.dataset.question = question;
     questionButton.classList.add("hidden");

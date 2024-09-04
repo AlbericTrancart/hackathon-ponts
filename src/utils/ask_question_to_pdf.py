@@ -5,7 +5,6 @@ import openai
 from openai import OpenAI
 from dotenv import load_dotenv
 from nltk.tokenize import sent_tokenize
-import markdown
 
 load_dotenv()
 
@@ -88,4 +87,4 @@ def ask_question_to_pdf(request):
     response = client.chat.completions.create(model="gpt-4o-mini", messages=discussion)
     message = response.choices[0].message.content
     discussion.append({"role": "assistant", "content": message})
-    return markdown.markdown(message)
+    return message
