@@ -12,7 +12,8 @@ def hello():
 @app.route("/prompt", methods=["POST", "GET"])
 def prompt():
     if request.method == "POST":
-        ans = src.utils.ask_question_to_pdf.gpt3_completion(request.form["prompt"])
+        req = request.form["prompt"]
+        ans = src.utils.ask_question_to_pdf.gpt3_completion(req)
         print(ans)
         s = jsonify({"answer": ans})
         return s
