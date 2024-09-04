@@ -16,10 +16,9 @@ jobs:
           python-version: "3.11"
 
       - name: Install Nix
-        run: curl -L https://nixos.org/nix/install | sh
-
-      - name: Source Nix
-        run: . /home/runner/.nix-profile/etc/profile.d/nix.sh
+        run: |
+          curl -L https://nixos.org/nix/install | sh
+          source $HOME/.nix-profile/etc/profile.d/nix.sh
 
       - name: Run flake8 Lint
         uses: py-actions/flake8@v2
