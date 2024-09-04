@@ -5,12 +5,14 @@
   <title>Ma page</title>
 
   <link id="style" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+
 </head>
 
 <body>
   <main class="main-container">
     <header class="header">
       <h1 class="header-title">Mon A.I. de mémoire</h1>
+
     </header>
 
     <section id="messages-container" class="messages-container">
@@ -31,13 +33,21 @@
         Pose-moi une question !
       </button>
 
-      <button type="button" class="button" id="dark-button">
-        Enregistre pdf
+      <button type="button" class="button" id="change_style">
+        Mode Sombre
       </button>
+
     </form>
+
+
 
     <script src="{{ url_for('static', filename='prompt.js') }}"></script>
   </main>
+  <form id="save-form" class="save-container"></form>
+  <button type="button" class="button" id="enregistre">
+    Enregistre
+  </button>
+  </form>
 </body>
 
 </html>

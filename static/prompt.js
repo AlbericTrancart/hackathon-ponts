@@ -2,7 +2,8 @@ const promptForm = document.getElementById("prompt-form");
 const submitButton = document.getElementById("submit-button");
 const questionButton = document.getElementById("question-button");
 const messagesContainer = document.getElementById("messages-container");
-const darkMode = document.getElementById("dark-button");
+const enregistre = document.getElementById("enregistre");
+const dark_mode = document.getElementById("change_style");
 
 const appendHumanMessage = (message) => {
   const humanMessageElement = document.createElement("div");
@@ -72,16 +73,22 @@ const handleQuestionClick = async (event) => {
 };
 
 
-const handleDarkClick = async (event) => {
+const handleSaveClick = async (event) => {
+  print()
+};
+
+const handleColor = async (event) => {
   var stylesheet = document.getElementById('style')
-  if (stylesheet.getAttribute('href') === 'style.css') {
-    stylesheet.setAttribute('href', 'dark_style.css');
-    print("yes")
+  if (stylesheet.getAttribute('href') === "static/style.css") {
+    stylesheet.setAttribute('href', "static/dark_style.css");
   }
-  else {
-    stylesheet.setAttribute('href', 'style.css');
+  if (stylesheet.getAttribute('href') === "static/dark_style.css") {
+    stylesheet.setAttribute('href', "static/style.css");
   }
 };
 
+
 questionButton.addEventListener("click", handleQuestionClick);
-darkMode.addEventListener("click", handleDarkClick);
+enregistre.addEventListener("click", handleSaveClick);
+dark_mode.addEventListener("click", handleColor);
+
