@@ -18,9 +18,9 @@ qcm = """pose moi un unique question à 3 choix de réponses
 
 repA = """je choisis la reponse A a la question précedente, vérifie
 en répondant d'abord par vrai ou faux puis la bonne reponse"""
-repB = """je choisis la reponse A a la question précedente, vérifie
+repB = """je choisis la reponse B a la question précedente, vérifie
 en répondant d'abord par vrai ou faux puis la bonne reponse"""
-repC = """je choisis la reponse A a la question précedente, vérifie
+repC = """je choisis la reponse C a la question précedente, vérifie
 en répondant d'abord par vrai ou faux puis la bonne reponse"""
 
 
