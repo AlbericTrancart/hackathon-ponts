@@ -78,12 +78,15 @@ const handleSaveClick = async (event) => {
 };
 
 const handleColor = async (event) => {
-  var stylesheet = document.getElementById('style')
-  if (stylesheet.getAttribute('href') === "static/style.css") {
-    stylesheet.setAttribute('href', "static/dark_style.css");
+  console.log("yes")
+  if (document.getElementById('style').getAttribute('href') === "/static/style.css") {
+    console.log("yeah")
+    document.getElementById('style').setAttribute('href', "/static/dark_style.css");
+    return
   }
-  if (stylesheet.getAttribute('href') === "static/dark_style.css") {
-    stylesheet.setAttribute('href', "static/style.css");
+  if (document.getElementById('style').getAttribute('href') === "/static/dark_style.css") {
+    document.getElementById('style').setAttribute('href', "/static/style.css");
+    return
   }
 };
 

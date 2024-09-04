@@ -1,10 +1,10 @@
 :root {
-  --body-background-color: #2a303b;
-  --main-background-color: #262222;
-  --main-color: #004cdb;
+  --body-background-color: #333633;
+  --main-background-color: #2a2b29;
+  --main-color: #ECDFCC;
   --max-body-width: 700px;
-  --border-color: #ae0000;
-  --secondary-color: #7e6500;
+  --border-color: #aaaaaa;
+  --secondary-color: #697565;
   --loader-bullet-size: 6px;
 }
 
@@ -82,7 +82,7 @@ body {
   border: 1px solid var(--border-color);
   padding: 5px;
   border-radius: 5px;
-  background-color: var(--main-background-color);
+  background-color: var(--border-color);
 }
 
 .button:hover,
