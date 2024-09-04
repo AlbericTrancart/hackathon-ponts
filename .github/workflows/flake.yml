@@ -18,7 +18,8 @@ jobs:
       - name: Install Nix
         run: |
           curl -L https://nixos.org/nix/install | sh
-          source $HOME/.nix-profile/etc/profile.d/nix.sh
+          echo ". $HOME/.nix-profile/etc/profile.d/nix.sh" >> $GITHUB_ENV
+          echo "$HOME/.nix-profile/bin" >> $GITHUB_PATH
 
       - name: Run flake8 Lint
         uses: py-actions/flake8@v2
