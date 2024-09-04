@@ -39,3 +39,5 @@ def return_answer():
     input = request.form["prompt"]
     answer = validate_answer(input)
     return {"answer": answer}
+
+# used to check env files
