@@ -38,6 +38,13 @@ def read_pdf(filename):
     return context
 
 
+# goal : be able to read a txt
+def read_txt(filename):
+    with open(filename, "r") as file:
+        data = file.read().replace("\n", "")
+    return data
+
+
 def split_text(text, chunk_size=5000):
     chunks = []
     current_chunk = StringIO()
@@ -66,14 +73,21 @@ def split_text(text, chunk_size=5000):
     return chunks
 
 
-filename = os.path.join(os.path.dirname(__file__), "../../filename.pdf")
-document = read_pdf(filename)
+filename = os.path.join(os.path.dirname(__file__), "../../cesar.txt")
+length_name = len(filename)
+if filename[length_name - 3 :] == "pdf":
+    document = read_pdf(filename)
+    print("pdf")
+else:
+    document = read_txt(filename)
+    print("txt")
 chunks = split_text(document)
 tx1 = "Réponds aux questions en te basant"
 tx2 = "sur le document suivant :"
 
 
 def gpt3_completion(ppt, doc=document):
+    print(doc)
     client = openai.OpenAI()
     response = client.chat.completions.create(
         model="gpt-4o-mini",
@@ -85,5 +99,9 @@ def gpt3_completion(ppt, doc=document):
             {"role": "user", "content": ppt},
         ],
     )
+    # messages.append(role, reponse : response.choices[0].message.content)
+    # bouton "je vais transmettre un document : modifier message sysyème (doc)
+    # en appuyant sur un bouton, on modifie les paramètres du fichier css
+    # les boutons sont à déclarer dans html
     print(response)
     return response.choices[0].message.content
