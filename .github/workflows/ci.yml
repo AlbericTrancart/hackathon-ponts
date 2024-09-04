@@ -1,0 +1,20 @@
+name: CI Workflow
+
+# Déclencher le workflow à chaque push
+on: 
+  push:
+
+# Jobs à exécuter
+jobs:
+  build:
+    # S'exécute sur un environnement Ubuntu
+    runs-on: ubuntu-latest
+    
+    steps:
+    # Première étape : Utiliser une action préconfigurée pour vérifier le dépôt
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    # Deuxième étape : Exécuter une commande simple pour vérifier que tout fonctionne
+    - name: Run a one-line script
+      run: echo "Hello, world!"
