@@ -28,10 +28,8 @@ def question():
 @app.route("/answer", methods=["POST", "GET"])
 def answer():
     prompt = request.form["prompt"]
-    prompt = (
-    +        prompt
-    +        + "Est-ce la bonne réponse ? Si ce n'est pas la bonne réponse, donne la bonne              réponse."
-    +    )
+    prompt = (prompt+
+    +"Est-ce la bonne réponse ? Si ce n'est pas la bonne réponse, donne la bonne              réponse."+)
     ans = ask_q.gpt3_completion(prompt)
     s = jsonify({"answer": ans})
 
