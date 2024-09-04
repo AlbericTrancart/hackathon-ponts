@@ -1,4 +1,21 @@
-const converter = new showdown.Converter();  // To convert .md from GTP into .html
+showdown.extension('only-inline-stuff', function () {
+  return [{
+    type: 'output',
+    filter: function (text) {
+      // remove paragraphs
+      text = text.replace(/<\/?p[^>]*>/g, '');
+
+      // remove code (if you want)
+      // text = text.replace(/<\/?code[^>]*>/g, '');
+
+      //add other stuff here that you want to remove
+      // text = text.replace(, '');
+      return text;
+    }
+  }];
+});  // To remove paragraph boxes
+
+const converter = new showdown.Converter({ extensions: ['only-inline-stuff'], strikethrough: true });  // To convert .md from GTP into .html
 
 const promptForm = document.getElementById("prompt-form");
 const submitButton = document.getElementById("submit-button");
