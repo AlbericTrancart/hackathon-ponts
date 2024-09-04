@@ -80,7 +80,7 @@ def gpt3_completion(ppt, doc=document):
         messages=[
             {
                 "role": "system",
-                "content": tx1 + tx2 + doc, 
+                "content": tx1 + tx2 + doc,
             },
             {"role": "user", "content": ppt},
         ],
