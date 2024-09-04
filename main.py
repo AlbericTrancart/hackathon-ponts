@@ -16,6 +16,13 @@ text = """pose moi une nouvelle question sur le
 qcm = """pose moi un unique question à 3 choix de réponses
     sur le texte sur les ponts-et-chaussées sans donner la réponse"""
 
+repA = """je choisis la reponse A a la question précedente, vérifie
+en répondant d'abord par vrai ou faux puis la bonne reponse"""
+repB = """je choisis la reponse A a la question précedente, vérifie
+en répondant d'abord par vrai ou faux puis la bonne reponse"""
+repC = """je choisis la reponse A a la question précedente, vérifie
+en répondant d'abord par vrai ou faux puis la bonne reponse"""
+
 
 @app.route("/")
 def front_page(name=None):
@@ -58,5 +65,23 @@ def return_answer():
 
 @app.route("/qcm", methods=["GET"])
 def give_qcm(given_text=qcm):
+    answer = gpt3_completion(given_text)
+    return {"answer": answer}
+
+
+@app.route("/repA", methods=["GET"])
+def reponseA(given_text=repA):
+    answer = gpt3_completion(given_text)
+    return {"answer": answer}
+
+
+@app.route("/repB", methods=["GET"])
+def reponseB(given_text=repB):
+    answer = gpt3_completion(given_text)
+    return {"answer": answer}
+
+
+@app.route("/repC", methods=["GET"])
+def reponseC(given_text=repC):
     answer = gpt3_completion(given_text)
     return {"answer": answer}

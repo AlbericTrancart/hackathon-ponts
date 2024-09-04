@@ -106,11 +106,10 @@ const handleQCM = async (event) => {
       method: "GET",
     });
     const result = await response.json();
-    console.log("etape")
     const question = result.answer;
 
     questionButton.dataset.question = question;
-    questionButton.classList.add("hidden");
+    questionButton.classList.remove("hidden");
     submitButton.innerHTML = "Répondre au QCM";
 
     document.getElementById("response-A").removeAttribute("hidden");
@@ -127,15 +126,57 @@ dark_mode.addEventListener("click", handleColor);
 qcmButton.addEventListener("click", handleQCM);
 
 const handleA = async (event) => {
-  print()
+  appendAIMessage(async () => {
+    const response = await fetch("/repA", {
+      method: "GET",
+    });
+    const result = await response.json();
+    const question = result.answer;
+
+    questionButton.dataset.question = question;
+    questionButton.classList.remove("hidden");
+    submitButton.innerHTML = "Message";
+    document.getElementById("response-A").setAttribute("hidden", "hidden");
+    document.getElementById("response-B").setAttribute("hidden", "hidden");
+    document.getElementById("response-C").setAttribute("hidden", "hidden");
+    return question;
+  });
 };
 
 const handleB = async (event) => {
-  print()
+  appendAIMessage(async () => {
+    const response = await fetch("/repB", {
+      method: "GET",
+    });
+    const result = await response.json();
+    const question = result.answer;
+
+    questionButton.dataset.question = question;
+    questionButton.classList.remove("hidden");
+    submitButton.innerHTML = "Message";
+    document.getElementById("response-A").setAttribute("hidden", "hidden");
+    document.getElementById("response-B").setAttribute("hidden", "hidden");
+    document.getElementById("response-C").setAttribute("hidden", "hidden");
+    return question;
+  });
 };
 
 const handleC = async (event) => {
-  print()
+  appendAIMessage(async () => {
+    const response = await fetch("/repC", {
+      method: "GET",
+    });
+    const result = await response.json();
+    const question = result.answer;
+
+    questionButton.dataset.question = question;
+    questionButton.classList.add("hidden");
+    submitButton.innerHTML = "Message";
+    document.getElementById("response-A").setAttribute("hidden", "hidden");
+    document.getElementById("response-B").setAttribute("hidden", "hidden");
+    document.getElementById("response-C").setAttribute("hidden", "hidden");
+    return question;
+  });
 };
 
 
