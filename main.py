@@ -9,6 +9,9 @@ app = Flask(__name__)
 text = """pose moi une nouvelle question sur le
     texte sur les ponts-et-chaussées !"""
 
+qcm = """pose moi un unique question à 3 choix de réponses
+    sur le texte sur les ponts-et-chaussées sans donner la réponse"""
+
 
 @app.route("/")
 def front_page(name=None):
@@ -40,4 +43,8 @@ def return_answer():
     answer = validate_answer(input)
     return {"answer": answer}
 
-# used to check env files
+
+@app.route("/qcm", methods=["GET"])
+def give_qcm(given_text=qcm):
+    answer = gpt3_completion(given_text)
+    return {"answer": answer}

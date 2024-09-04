@@ -4,6 +4,11 @@ const questionButton = document.getElementById("question-button");
 const messagesContainer = document.getElementById("messages-container");
 const enregistre = document.getElementById("enregistre");
 const dark_mode = document.getElementById("change_style");
+const qcmButton = document.getElementById("qcm-button");
+
+const A_Button = document.getElementById("response-A");
+const B_Button = document.getElementById("response-B");
+const C_Button = document.getElementById("response-C");
 
 const appendHumanMessage = (message) => {
   const humanMessageElement = document.createElement("div");
@@ -41,6 +46,10 @@ const handlePrompt = async (event) => {
     delete questionButton.dataset.question;
     questionButton.classList.remove("hidden");
     submitButton.innerHTML = "Message";
+
+    document.getElementById("response-A").setAttribute("hidden", "hidden");
+    document.getElementById("response-B").setAttribute("hidden", "hidden");
+    document.getElementById("response-C").setAttribute("hidden", "hidden");
   }
 
   appendHumanMessage(data.get("prompt"));
@@ -68,6 +77,8 @@ const handleQuestionClick = async (event) => {
     questionButton.dataset.question = question;
     questionButton.classList.add("hidden");
     submitButton.innerHTML = "Répondre à la question";
+
+
     return question;
   });
 };
@@ -78,7 +89,6 @@ const handleSaveClick = async (event) => {
 };
 
 const handleColor = async (event) => {
-  console.log("yes")
   if (document.getElementById('style').getAttribute('href') === "/static/style.css") {
     console.log("yeah")
     document.getElementById('style').setAttribute('href', "/static/dark_style.css");
@@ -90,7 +100,45 @@ const handleColor = async (event) => {
   }
 };
 
+const handleQCM = async (event) => {
+  appendAIMessage(async () => {
+    const response = await fetch("/qcm", {
+      method: "GET",
+    });
+    const result = await response.json();
+    console.log("etape")
+    const question = result.answer;
+
+    questionButton.dataset.question = question;
+    questionButton.classList.add("hidden");
+    submitButton.innerHTML = "Répondre au QCM";
+
+    document.getElementById("response-A").removeAttribute("hidden");
+    document.getElementById("response-B").removeAttribute("hidden");
+    document.getElementById("response-C").removeAttribute("hidden");
+    return question;
+  });
+};
+
 
 questionButton.addEventListener("click", handleQuestionClick);
 enregistre.addEventListener("click", handleSaveClick);
 dark_mode.addEventListener("click", handleColor);
+qcmButton.addEventListener("click", handleQCM);
+
+const handleA = async (event) => {
+  print()
+};
+
+const handleB = async (event) => {
+  print()
+};
+
+const handleC = async (event) => {
+  print()
+};
+
+
+A_Button.addEventListener("click", handleA);
+B_Button.addEventListener("click", handleB);
+C_Button.addEventListener("click", handleC);
