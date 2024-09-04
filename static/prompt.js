@@ -2,6 +2,7 @@ const promptForm = document.getElementById("prompt-form");
 const submitButton = document.getElementById("submit-button");
 const questionButton = document.getElementById("question-button");
 const messagesContainer = document.getElementById("messages-container");
+const enregistre = document.getElementById("enregistre");
 
 const appendHumanMessage = (message) => {
   const humanMessageElement = document.createElement("div");
@@ -70,4 +71,10 @@ const handleQuestionClick = async (event) => {
   });
 };
 
+const handleSaveClick = async (event) => {
+  print()
+  console.log("yes")
+};
+
 questionButton.addEventListener("click", handleQuestionClick);
+enregistre.addEventListener("click", handleSaveClick);
