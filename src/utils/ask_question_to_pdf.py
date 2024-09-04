@@ -4,9 +4,30 @@ import fitz
 import openai
 from dotenv import load_dotenv
 from nltk.tokenize import sent_tokenize
+#from openai import OpenAI
+import openai
 
 load_dotenv()
 
+import PyPDF2
+def extract_text_from_pdf(pdf_path):
+    # Ouvrir le fichier PDF en mode lecture binaire
+    with open(pdf_path, 'rb') as file:
+        # Créer un lecteur de fichier PDF
+        reader = PyPDF2.PdfReader(file)
+        
+        # Initialiser une chaîne pour accumuler le texte
+        text = ""
+        
+        # Parcourir toutes les pages et extraire le texte
+        for page in range(len(reader.pages)):
+            text += reader.pages[page].extract_text()
+        
+        return text
+    hackathon-ponts/src/utils/filename.pdf
+   
+#text = extract_text_from_pdf("/Users/diaea/Downloads/ENGLISH.pdf")
+text = extract_text_from_pdf("/Users/diaea/tp-hackathon/hackathon-ponts/filename.pdf")
 
 def open_file(filepath):
     with open(filepath, "r", encoding="utf-8") as infile:
@@ -65,7 +86,47 @@ def split_text(text, chunk_size=5000):
         chunks.append(current_chunk.getvalue())
     return chunks
 
+def gpt3_completion(prompt):
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": prompt}
+            ],
+        )
+        return response['choices'][0]['message']['content'].strip()
+    except Exception as e:
+        print(f"Une erreur s'est produite lors de l'appel à l'API OpenAI : {e}")
+        return None
+
+#def gpt3_completion(question):
+ #   client = OpenAI()
+#
+    #response = client.chat.completions.create(
+ #   model="gpt-4o-mini",
+  #  messages=[
+   #     {"role": "system", "content": "You are a helpful assistant."},
+    #    {"role": "user", "content": question},
+        #{"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
+    #]
+    #)
+    #return response['choices'][0]['message']['content'].strip()
+
+def ask_question_to_pdf(question="Peux-tu me résumer ce texte ?"):
+
+    prompt = f"{question} . Le texte est le suivant : {text}"
+    return gpt3_completion(prompt)
+
+#def ask_question_to_pdf(q="Quel est le premier mot du texte ?"):
+ #   qest = f"{q} . Le texte est le suivant : {text}"
+  #  res = gpt3_completion(qest)
+   # return res
+
+#print(gpt3_completion())
+print( ask_question_to_pdf("Puedes describir el contenido del texto?"))
 
 filename = os.path.join(os.path.dirname(__file__), "filename.pdf")
 document = read_pdf(filename)
 chunks = split_text(document)
+
