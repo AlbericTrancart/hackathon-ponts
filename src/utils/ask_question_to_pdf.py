@@ -15,6 +15,14 @@ def open_file(filepath):
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 openai.organization = os.getenv("OPENAI_ORGANIZATION")
+client = openai.OpenAI()
+
+text = "pose moi une nouvelle question sur le texte sur les ponts-et-chaussées !"
+
+
+discussion = [
+    {"role": "system", "content": "Le prochain texte est le cours qu'il faut apprendre"}
+]
 
 
 def read_pdf(filename):
@@ -66,6 +74,28 @@ def split_text(text, chunk_size=5000):
     return chunks
 
 
+for k in split_text(read_pdf("src/utils/filename.pdf")):
+    discussion.append({"role": "system", "content": k})
+
+
+def gpt3_completion(question, role="user"):
+    discussion.append({"role": role, "content": question})
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=discussion,
+    )
+    discussion.append(
+        {"role": "assistant", "content": response.choices[0].message.content}
+    )
+
+    return response.choices[0].message.content
+
+
 filename = os.path.join(os.path.dirname(__file__), "filename.pdf")
 document = read_pdf(filename)
 chunks = split_text(document)
+
+def validate_answer(question, role="user"):
+    discussion.append({"role": "system", "content": "Vérifie le prochain message"})
+    return gpt3_completion(question)
+    
