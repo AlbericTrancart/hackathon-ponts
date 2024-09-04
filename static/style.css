@@ -88,6 +88,13 @@ li {
   background-color: var(--main-background-color);
 }
 
+.qcm-block {
+  margin-left: 100px;
+  display: block;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
 .save-container {
   position: fixed;
   bottom: 0px;

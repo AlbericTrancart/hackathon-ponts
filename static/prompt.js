@@ -170,7 +170,7 @@ const handleC = async (event) => {
     const question = result.answer;
 
     questionButton.dataset.question = question;
-    questionButton.classList.add("hidden");
+    questionButton.classList.remove("hidden");
     submitButton.innerHTML = "Message";
     document.getElementById("response-A").setAttribute("hidden", "hidden");
     document.getElementById("response-B").setAttribute("hidden", "hidden");

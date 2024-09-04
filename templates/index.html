@@ -58,15 +58,17 @@
     </form>
 
     <form id="qcm-form" class="qcm-container"></form>
-    <button type="button" class="button" id="response-A" hidden="hidden">
-      A
+    <div class="qcm-block">
+      <button type="button" class="button" id="response-A" hidden="hidden">
+        A
+      </button>
+      <button type="button" class="button" id="response-B" hidden="hidden">
+        B
+      </button>
+      <button type="button" class="button" id="response-C" hidden="hidden">
+        C
     </button>
-    <button type="button" class="button" id="response-B" hidden="hidden">
-      B
-    </button>
-    <button type="button" class="button" id="response-C" hidden="hidden">
-      C
-    </button>
+    </div>
     </form>
     <script src="{{ url_for('static', filename='prompt.js') }}"></script>
     <script>
