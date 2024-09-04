@@ -21,7 +21,7 @@ text = "pose moi une nouvelle question sur le texte sur les ponts-et-chaussées 
 
 
 discussion = [
-    {"role": "system", "content": "Le prochain texte est le cours qu'il faut apprendre"}
+    {"role": "system", "content": "Le prochain texte est le cours qu'il faut apprendre"} 
 ]
 
 
