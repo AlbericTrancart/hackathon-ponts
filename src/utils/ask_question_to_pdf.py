@@ -17,14 +17,14 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 openai.organization = os.getenv("OPENAI_ORGANIZATION")
 client = openai.OpenAI()
 
-text = """pose moi une nouvelle question 
+text = """pose moi une nouvelle question
 sur le texte sur les ponts-et-chaussées !"""
 
 
 discussion = [
     {
         "role": "system",
-        "content": """Le prochain texte est le cours 
+        "content": """Le prochain texte est le cours
      qu'il faut apprendre""",
     }
 ]
@@ -105,7 +105,7 @@ def validate_answer(question, role="user"):
     discussion.append(
         {
             "role": "system",
-            "content": """Vérifie 
+            "content": """Vérifie
                        le prochain message""",
         }
     )
