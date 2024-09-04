@@ -92,7 +92,9 @@ def ask_question_to_pdf(request):
 
 def initialize_session():
     global document
-    document = read_pdf("../../document.pdf")
+    filename = os.path.join(os.path.dirname(__file__), "../../document.pdf")
+    document = read_pdf(filename)
+    discussion.clear()
     discussion.append(
         {
             "role": "system",

@@ -101,7 +101,7 @@ const handleImportClick = () => {
 
         if (response.ok) {
           const result = await response.json();
-          appendAIMessage(() => Promise.resolve(`File uploaded successfully: ${result.message}`));
+          appendAIMessage(() => Promise.resolve(`File uploaded successfully: ${result.response}`));
         } else {
           appendAIMessage(() => Promise.resolve("Failed to upload the file."));
         }

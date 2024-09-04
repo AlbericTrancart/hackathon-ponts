@@ -49,3 +49,6 @@ def upload_file():
         file_path = "document.pdf"
         file.save(file_path)
         initialize_session()
+        return {"response": file.filename}
+
+    return {"error": "Invalid file type. Only PDFs are allowed."}, 400
