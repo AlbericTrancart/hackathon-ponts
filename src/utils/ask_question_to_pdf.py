@@ -110,3 +110,12 @@ def validate_answer(question, role="user"):
         }
     )
     return gpt3_completion(question)
+
+
+def add_information_historic(information, role="user"):
+    discussion.append(
+        {
+            "role": "system",
+            "content": information,
+        }
+    )

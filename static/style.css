@@ -19,6 +19,15 @@ body {
   font-family: sans-serif;
 }
 
+ul {
+  list-style-type: none;
+  margin: 0;
+}
+
+li {
+  margin-top: 20px;
+}
+
 .main-container {
   max-width: var(--max-body-width);
   min-height: 100vh;
@@ -114,6 +123,12 @@ body {
   background-color: var(--body-background-color);
   cursor: pointer;
 }
+
+.w3-sidebar {
+  position: fixed;
+}
+
+
 
 .hidden {
   display: none;
