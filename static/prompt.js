@@ -3,10 +3,7 @@ const submitButton = document.getElementById("submit-button");
 const questionButton = document.getElementById("question-button");
 const messagesContainer = document.getElementById("messages-container");
 const enregistre = document.getElementById("enregistre");
-<<<<<<< HEAD
 const dark_mode = document.getElementById("change_style");
-=======
->>>>>>> main
 
 const appendHumanMessage = (message) => {
   const humanMessageElement = document.createElement("div");
@@ -75,7 +72,6 @@ const handleQuestionClick = async (event) => {
   });
 };
 
-<<<<<<< HEAD
 
 const handleSaveClick = async (event) => {
   print()
@@ -95,13 +91,3 @@ const handleColor = async (event) => {
 questionButton.addEventListener("click", handleQuestionClick);
 enregistre.addEventListener("click", handleSaveClick);
 dark_mode.addEventListener("click", handleColor);
-
-=======
-const handleSaveClick = async (event) => {
-  print()
-  console.log("yes")
-};
-
-questionButton.addEventListener("click", handleQuestionClick);
-enregistre.addEventListener("click", handleSaveClick);
->>>>>>> main
