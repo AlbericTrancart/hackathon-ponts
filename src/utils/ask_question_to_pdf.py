@@ -82,6 +82,8 @@ else:
     document = read_txt(filename)
     print("txt")
 chunks = split_text(document)
+tx1 = "Réponds aux questions en te basant"
+tx2 = "sur le document suivant :"
 
 
 def gpt3_completion(ppt, doc=document):
@@ -92,8 +94,7 @@ def gpt3_completion(ppt, doc=document):
         messages=[
             {
                 "role": "system",
-                "content": "Reponds aux questions en te basant sur le document suivant :"
-                + doc,
+                "content": tx1 + tx2 + doc,
             },
             {"role": "user", "content": ppt},
         ],
