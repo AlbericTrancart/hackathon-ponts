@@ -35,5 +35,28 @@ def answer():
     )
     ans = ask_q.gpt3_completion(prompt)
     s = jsonify({"answer": ans})
+    return s
 
+@app.route("/perro", methods=["POST", "GET"])
+def perro():
+    ans = ask_q.gpt3_completion("Incarnes Jean Rodolphe Perronnet (https://fr.wikipedia.org/wiki/Jean-Rodolphe_Perronet), présentes toi très rapidement et propose ton aide")
+    s = jsonify({"answer": ans})
+    return s
+
+@app.route("/perro2", methods=["POST", "GET"])
+def perro2():
+    ans = ask_q.gpt3_completion("Réponds rapidement et relance la conversation")
+    s = jsonify({"answer": ans})
+    return s
+
+@app.route("/dormieux2", methods=["POST", "GET"])
+def dormieux2():
+    ans = ask_q.gpt3_completion("Réponds rapidement et relance la conversation ")
+    s = jsonify({"answer": ans})
+    return s
+
+@app.route("/dormieux", methods=["POST", "GET"])
+def dormieux():
+    ans = ask_q.gpt3_completion("Incarnes Luc Dormieux (https://fr.wikipedia.org/wiki/Luc_Dormieux), présentes toi très rapidement et enchaîne en proposant un exercice de mecanique")
+    s = jsonify({"answer": ans})
     return s
