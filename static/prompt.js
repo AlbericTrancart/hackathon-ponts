@@ -94,12 +94,14 @@ const handleSaveClick = async (event) => {
 
 const handleColor = async (event) => {
   if (document.getElementById('style').getAttribute('href') === "/static/style.css") {
-    console.log("yeah")
+    console.log("yeah, inspired py Philippe")
     document.getElementById('style').setAttribute('href', "/static/dark_style.css");
+    document.getElementById('change_style').innerHTML = "&#x2600";
     return
   }
   if (document.getElementById('style').getAttribute('href') === "/static/dark_style.css") {
     document.getElementById('style').setAttribute('href', "/static/style.css");
+    document.getElementById('change_style').innerHTML = "&#x1F319";
     return
   }
 };
