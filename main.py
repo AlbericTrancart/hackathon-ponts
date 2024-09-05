@@ -1,4 +1,3 @@
-import os
 from flask import render_template
 from flask import Flask
 from flask import request, jsonify
@@ -28,7 +27,6 @@ repB = """je choisis la reponse B a la question précedente, vérifie
 en répondant d'abord par vrai ou faux puis la bonne reponse"""
 repC = """je choisis la reponse C a la question précedente, vérifie
 en répondant d'abord par vrai ou faux puis la bonne reponse"""
-
 
 
 @app.route("/")
@@ -61,6 +59,7 @@ def return_answer():
     answer = validate_answer(input)
     return {"answer": answer}
 
+
 @app.route("/qcm", methods=["GET"])
 def give_qcm(given_text=qcm):
     answer = gpt3_completion(given_text)
@@ -84,10 +83,15 @@ def reponseC(given_text=repC):
     answer = gpt3_completion(given_text)
     return {"answer": answer}
 
+
 @app.route("/cours", methods=["GET"])
 def give_new_course():
     answer = gpt3_completion(
-        """Demande à l'utilisateur d'envoyer le cours sur lequel il a des questions ou il veut que tu l'interroges. Quand il a envoyé le texte ne répond pas à son message mais attend qu'il te pose une question"""
+        """Demande à l'utilisateur d'envoyer le cours
+          sur lequel il a des questions
+          ou il veut que tu l'interroges.
+          Quand il a envoyé le texte ne répond
+          pas à son message mais attend qu'il te pose une question"""
     )
     return {"answer": answer}
 
@@ -100,13 +104,8 @@ def uploading(given_text=new_text):
     file = request.files["file"]
     file.save("src/utils/filename.pdf")
 
-    # filename = os.path.join(os.path.dirname(__file__), "src/utils/filename.pdf")
-    # document = read_pdf(filename)
-    # chunks = split_text(document)
-    # print(chunks)
     for k in split_text(read_pdf("src/utils/filename.pdf")):
         add_information_historic(k)
-        #print(k)
 
     # add_information_historic(chunks)
     return jsonify({"message": "File uploaded successfully"}), 200
