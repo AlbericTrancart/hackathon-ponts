@@ -76,8 +76,8 @@ discussion = [
     {
         "role": "system",
         "content": "Tu es un assistant qui aide à comprendre le contenu d'une certaine "
-                   "documentation. Voici la documentation à laquelle tu as accès et pour "
-                   "laquelle tu dois aider : " + document,
+        "documentation. Voici la documentation à laquelle tu as accès et pour "
+        "laquelle tu dois aider : " + document,
     }
 ]
 
@@ -99,7 +99,7 @@ def initialize_session():
         {
             "role": "system",
             "content": "Tu es un assistant qui aide à comprendre le contenu d'une certaine "
-                       "documentation. Voici la documentation à laquelle tu as accès et pour "
-                       "laquelle tu dois aider : " + document,
+            "documentation. Voici la documentation à laquelle tu as accès et pour "
+            "laquelle tu dois aider : " + document,
         }
     )
