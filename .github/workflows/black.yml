@@ -1,0 +1,26 @@
+name: Lint
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: psf/black@stable
+      - uses: psf/black@stable
+        with:
+          options: "--check --verbose"
+          src: "./src"
+          jupyter: true
+          version: "21.5b1"
+      - uses: psf/black@stable
+        with:
+          options: "--check --verbose"
+          src: "./src"
+          version: "~= 22.0"
+      - uses: psf/black@stable
+        with:
+          options: "--check --verbose"
+          src: "./src"
+          use_pyproject: true
