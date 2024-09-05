@@ -51,7 +51,7 @@ def upload_file():
     if file.filename.endswith(".pdf"):
         file_path = "document.pdf"
         file.save(file_path)
-        filename = os.path.join(os.path.dirname(__file__), "../../document.pdf")
+        filename = os.path.join(os.path.dirname(__file__), "document.pdf")
         context = read_pdf(filename)
         initialize_session(context)
         return {"response": file.filename}
