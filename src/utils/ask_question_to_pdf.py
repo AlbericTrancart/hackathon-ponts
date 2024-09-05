@@ -75,7 +75,7 @@ chunks = split_text(document)
 message_history.append({"role": "user", "content": chunks[0]})
 
 
-def gpt3_completion(prompt_user, model="gpt-3.5-turbo", max_tokens=150):
+def gpt3_completion(prompt_user, model="gpt-3.5-turbo", max_tokens=450):
     global message_history
 
     message_history.append({"role": "user", "content": prompt_user})

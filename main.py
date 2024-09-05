@@ -31,7 +31,7 @@ def answer():
     prompt = (
         prompt
         + "\n"
-        + "Est-ce la bonne réponse ? Si ce n'est pas la bonne réponse, donne la bonne              réponse."
+        + "Est-ce la bonne réponse ? Réponds par vrai ou faux. Si c'est Faux, donne la bonne réponse."
     )
     ans = ask_q.gpt3_completion(prompt)
     s = jsonify({"answer": ans})
