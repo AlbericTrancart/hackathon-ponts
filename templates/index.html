@@ -10,13 +10,14 @@
 <body class="light-mode">
   <main class="main-container">
     <header class="header">
-      <h1 class="header-title">Mon A.I.de mémoire</h1>
+      <h1 class="header-title">Mon A.I. de mémoire</h1>
       <button id="toggle-mode" style="position: relative; top: -15px;">Mode Sombre</button>
     </header>
 
     <section id="messages-container" class="messages-container">
       <div class="message message-ai">
-        Bonjour je suis François Chevoir.
+        Je suis ton AIssistant de cours personnel ! Pose-moi une question sur
+        le cours et je te répondrai.
       </div>
     </section>
 
@@ -30,8 +31,12 @@
       <button type="button" class="button" id="question-button">
         Pose-moi une question !
       </button>
+      <button type="button" class="button" id="import-button">
+        Importer...
+      </button>
     </form>
 
+    <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
     <script src="{{ url_for('static', filename='prompt.js') }}"></script>
   </main>
 </body>

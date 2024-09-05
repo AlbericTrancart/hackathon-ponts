@@ -88,3 +88,17 @@ def ask_question_to_pdf(request):
     message = response.choices[0].message.content
     discussion.append({"role": "assistant", "content": message})
     return message
+
+
+def initialize_session(context):
+    global document
+    document = context
+    discussion.clear()
+    discussion.append(
+        {
+            "role": "system",
+            "content": "Tu es un assistant qui aide à comprendre le contenu d'une certaine "
+            "documentation. Voici la documentation à laquelle tu as accès et pour "
+            "laquelle tu dois aider : " + document,
+        }
+    )
