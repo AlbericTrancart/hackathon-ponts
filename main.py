@@ -119,3 +119,18 @@ def reini(given_text=repC):
     for k in split_text(read_pdf("src/utils/ponts.pdf")):
         add_information_historic(k)
     return jsonify({"message": "reini successfully"}), 200
+
+
+@app.route("/uploadtxt", methods=["POST"])
+def uploadingTXT(given_text=new_text):
+    if "file" not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
+
+    file = request.files["file"]
+    file.save("src/utils/filename.txt")
+
+    content_txt = open("src/utils/filename.txt", "r").read()
+    add_information_historic(content_txt)
+
+    # add_information_historic(chunks)
+    return jsonify({"message": "File uploaded successfully"}), 200
