@@ -90,10 +90,9 @@ def ask_question_to_pdf(request):
     return message
 
 
-def initialize_session():
+def initialize_session(context):
     global document
-    filename = os.path.join(os.path.dirname(__file__), "../../document.pdf")
-    document = read_pdf(filename)
+    document = context
     discussion.clear()
     discussion.append(
         {

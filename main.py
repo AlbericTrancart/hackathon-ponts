@@ -1,8 +1,11 @@
+import os
+
 from flask import Flask
 from flask import render_template
 from flask import request
+from docx import Document
 
-from src.utils.ask_question_to_pdf import ask_question_to_pdf, initialize_session
+from src.utils.ask_question_to_pdf import ask_question_to_pdf, initialize_session, read_pdf
 
 app = Flask(__name__)
 
@@ -41,14 +44,53 @@ def upload_file():
     file = request.files["file"]
 
     # Vérification si un fichier a été sélectionné
-    if file.filename == "":
+    if file.filename == "" or not file:
         return {"error": "No selected file"}, 400
 
-    if file and file.filename.endswith(".pdf"):
-        # Sauvegarde temporaire du fichier pour le lire
+    # Si c'est un fichier PDF
+    if file.filename.endswith(".pdf"):
         file_path = "document.pdf"
         file.save(file_path)
-        initialize_session()
+        filename = os.path.join(os.path.dirname(__file__), "../../document.pdf")
+        context = read_pdf(filename)
+        initialize_session(context)
         return {"response": file.filename}
 
-    return {"error": "Invalid file type. Only PDFs are allowed."}, 400
+    # Si c'est un fichier TXT
+    elif file.filename.endswith(".txt"):
+        file_path = "document.txt"
+        file.save(file_path)
+        with open(file_path, "r", encoding="utf-8") as f:
+            content = f.read()
+        initialize_session(content)
+        return {"response": file.filename}
+
+    # Si c'est un fichier HTML
+    elif file.filename.endswith(".html"):
+        file_path = "document.html"
+        file.save(file_path)
+        with open(file_path, "r", encoding="utf-8") as f:
+            content = f.read()
+        initialize_session(content)  # Traiter le contenu HTML comme du texte brut ou autre
+        return {"response": file.filename}
+
+    # Si c'est un fichier Markdown (MD)
+    elif file.filename.endswith(".md"):
+        file_path = "document.md"
+        file.save(file_path)
+        with open(file_path, "r", encoding="utf-8") as f:
+            content = f.read()
+        initialize_session(content)  # Markdown traité comme du texte brut
+        return {"response": file.filename}
+
+    # Si c'est un fichier DOCX (Word)
+    elif file.filename.endswith(".docx"):
+        file_path = "document.docx"
+        file.save(file_path)
+        document = Document(file_path)
+        docx_text = "\n".join([para.text for para in document.paragraphs])  # Extraction du texte
+        initialize_session(docx_text)
+        return {"response": file.filename}
+
+    # Si le fichier n'est pas pris en charge
+    return {"error": "Invalid file type. Only PDFs, TXT, HTML, and MD are allowed."}, 400

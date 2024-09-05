@@ -96,7 +96,7 @@ const handleImportClick = () => {
   // Create an input element dynamically
   const inputElement = document.createElement("input");
   inputElement.type = "file";
-  inputElement.accept = "application/pdf"; // Only accept PDF files
+  inputElement.accept = ".pdf, .txt, .html, .md, .docx"; // Accepter PDF, TXT, HTML MD et DOCX
 
   // Trigger the file selection dialog
   inputElement.click();
@@ -105,8 +105,6 @@ const handleImportClick = () => {
   inputElement.addEventListener("change", async () => {
     const file = inputElement.files[0];
     if (file) {
-      console.log("Selected file:", file.name);
-
       // Create a FormData object and append the selected file
       const formData = new FormData();
       formData.append("file", file);
@@ -120,13 +118,12 @@ const handleImportClick = () => {
 
         if (response.ok) {
           const result = await response.json();
-          appendAIMessage(() => Promise.resolve(`File uploaded successfully: ${result.response}`));
+          appendAIMessage(() => Promise.resolve(`Fichier ajouté avec succès : ${result.response}`));
         } else {
-          appendAIMessage(() => Promise.resolve("Failed to upload the file."));
+          appendAIMessage(() => Promise.resolve("Impossible de télécharger le fichier !"));
         }
       } catch (error) {
-        console.error("Error uploading the file:", error);
-        appendAIMessage(() => Promise.resolve("An error occurred during the file upload."));
+        appendAIMessage(() => Promise.resolve("Le téléchargement du fichier a échoué"));
       }
     }
   });
