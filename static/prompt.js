@@ -71,3 +71,32 @@ const handleQuestionClick = async (event) => {
 };
 
 questionButton.addEventListener("click", handleQuestionClick);
+
+
+//Mode sombre 
+
+// Fonction pour basculer le mode sombre
+function toggleDarkMode() {
+  const body = document.body;
+  const root = document.documentElement;
+
+
+  if (body.classList.contains('light-mode')) {
+    // Basculer vers le mode sombre
+    body.classList.remove('light-mode');
+    body.classList.add('dark-mode');
+    root.style.setProperty('--main-background-color', '#121212');
+
+  } else {
+    // Basculer vers le mode clair
+    body.classList.remove('dark-mode');
+    body.classList.add('light-mode');
+    root.style.setProperty('--main-background-color', '#f5f6f8');
+  }
+
+
+}
+
+
+// Ajouter un écouteur d'événement au bouton
+document.getElementById('toggle-mode').addEventListener('click', toggleDarkMode);
