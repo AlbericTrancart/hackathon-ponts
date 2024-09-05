@@ -77,7 +77,7 @@ const handleImportClick = () => {
   // Create an input element dynamically
   const inputElement = document.createElement("input");
   inputElement.type = "file";
-  inputElement.accept = "application/pdf"; // Only accept PDF files
+  inputElement.accept = ".pdf, .txt, .html, .md, .docx"; // Accepter PDF, TXT, HTML MD et DOCX
 
   // Trigger the file selection dialog
   inputElement.click();
@@ -86,8 +86,6 @@ const handleImportClick = () => {
   inputElement.addEventListener("change", async () => {
     const file = inputElement.files[0];
     if (file) {
-      console.log("Selected file:", file.name);
-
       // Create a FormData object and append the selected file
       const formData = new FormData();
       formData.append("file", file);
