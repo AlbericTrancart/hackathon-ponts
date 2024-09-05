@@ -100,7 +100,14 @@ body {
   padding: 5px;
   border-radius: 5px;
   background-color: var(--body-background-color);
-  color: var(--main-color)
+  color: var(--main-color);
+}
+
+.buttonmode {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  color: yellow
 }
 
 .button:hover,
