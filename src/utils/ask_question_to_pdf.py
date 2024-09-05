@@ -2,6 +2,7 @@ from io import StringIO
 import os
 import fitz
 import openai
+from openai import OpenAI
 from dotenv import load_dotenv
 from nltk.tokenize import sent_tokenize
 
@@ -14,7 +15,6 @@ def open_file(filepath):
 
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
-openai.organization = os.getenv("OPENAI_ORGANIZATION")
 
 
 def read_pdf(filename):
@@ -66,6 +66,40 @@ def split_text(text, chunk_size=5000):
     return chunks
 
 
-filename = os.path.join(os.path.dirname(__file__), "filename.pdf")
+filename = os.path.join(os.path.dirname(__file__), "../../filename.pdf")
 document = read_pdf(filename)
 chunks = split_text(document)
+
+client = OpenAI()
+
+discussion = [
+    {
+        "role": "system",
+        "content": "Tu es un assistant qui aide à comprendre le contenu d'une certaine "
+                   "documentation. Voici la documentation à laquelle tu as accès et pour "
+                   "laquelle tu dois aider : " + document,
+    }
+]
+
+
+def ask_question_to_pdf(request):
+    discussion.append({"role": "user", "content": request})
+    response = client.chat.completions.create(model="gpt-4o-mini", messages=discussion)
+    message = response.choices[0].message.content
+    discussion.append({"role": "assistant", "content": message})
+    return message
+
+
+def initialize_session():
+    global document
+    filename = os.path.join(os.path.dirname(__file__), "../../document.pdf")
+    document = read_pdf(filename)
+    discussion.clear()
+    discussion.append(
+        {
+            "role": "system",
+            "content": "Tu es un assistant qui aide à comprendre le contenu d'une certaine "
+                       "documentation. Voici la documentation à laquelle tu as accès et pour "
+                       "laquelle tu dois aider : " + document,
+        }
+    )
