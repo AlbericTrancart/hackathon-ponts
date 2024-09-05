@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 
 text = """pose moi une nouvelle question sur le
-    texte !"""
+    texte sur le dernier cours que tu as appris !"""
 
 new_text = """a partir de maintenant tu réactualise
     ton texte via les messages précedent"""
@@ -28,6 +28,7 @@ repB = """je choisis la reponse B a la question précedente, vérifie
 en répondant d'abord par vrai ou faux puis la bonne reponse"""
 repC = """je choisis la reponse C a la question précedente, vérifie
 en répondant d'abord par vrai ou faux puis la bonne reponse"""
+
 
 
 @app.route("/")
@@ -60,7 +61,6 @@ def return_answer():
     answer = validate_answer(input)
     return {"answer": answer}
 
-
 @app.route("/qcm", methods=["GET"])
 def give_qcm(given_text=qcm):
     answer = gpt3_completion(given_text)
@@ -82,6 +82,13 @@ def reponseB(given_text=repB):
 @app.route("/repC", methods=["GET"])
 def reponseC(given_text=repC):
     answer = gpt3_completion(given_text)
+    return {"answer": answer}
+
+@app.route("/cours", methods=["GET"])
+def give_new_course():
+    answer = gpt3_completion(
+        """Demande à l'utilisateur d'envoyer le cours sur lequel il a des questions ou il veut que tu l'interroges. Quand il a envoyé le texte ne répond pas à son message mais attend qu'il te pose une question"""
+    )
     return {"answer": answer}
 
 
