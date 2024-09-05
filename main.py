@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 
 text = """pose moi une nouvelle question sur le
-    texte sur les ponts-et-chaussées !"""
+    texte !"""
 
 new_text = """a partir de maintenant tu réactualise
     ton texte via les messages précedent"""
@@ -50,10 +50,6 @@ def give_question(given_text=text):
 @app.route("/prompt", methods=["POST"])
 def return_prompt():
     input = request.form["prompt"]
-    add_information_historic(
-        """Vérifie que le prochain message est en rapport avec le texte du
-        l'Ecole des Ponts"""
-    )
     answer = gpt3_completion(input)
     return {"answer": answer}
 
@@ -61,10 +57,6 @@ def return_prompt():
 @app.route("/answer", methods=["POST"])
 def return_answer():
     input = request.form["prompt"]
-    add_information_historic(
-        """Vérifie que le prochain message est en rapport avec le texte du
-        l'Ecole des Ponts"""
-    )
     answer = validate_answer(input)
     return {"answer": answer}
 
@@ -101,9 +93,13 @@ def uploading(given_text=new_text):
     file = request.files["file"]
     file.save("src/utils/filename.pdf")
 
-    filename = os.path.join(os.path.dirname(__file__), "src/utils/filename.pdf")
-    document = read_pdf(filename)
-    chunks = split_text(document)
+    # filename = os.path.join(os.path.dirname(__file__), "src/utils/filename.pdf")
+    # document = read_pdf(filename)
+    # chunks = split_text(document)
+    # print(chunks)
+    for k in split_text(read_pdf("src/utils/filename.pdf")):
+        add_information_historic(k)
+        #print(k)
 
-    gpt3_completion(given_text)
+    # add_information_historic(chunks)
     return jsonify({"message": "File uploaded successfully"}), 200
