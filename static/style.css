@@ -60,11 +60,17 @@ li {
   border: 1px solid var(--border-color);
   border-radius: 5px;
   padding: 10px 15px;
+  align-self: baseline;
+  /*align-items: center;*/
+  text-align: left;
   transition: var(--transition-duration);
 }
 
 .message-human {
   background-color: var(--secondary-color);
+  text-align: right;
+  align-items: right;
+  align-self: end;
   transition: var(--transition-duration);
 }
 
