@@ -16,8 +16,6 @@
   --secondary-color: #54540b;
 }
 
-/* Mode sombre */
-
 .light-mode {
   --body-background-color: #ffffff;
   color: #000000;
@@ -107,7 +105,8 @@ body {
   border: none;
   padding: 0;
   background-color: transparent;
-  color: yellow
+  color: yellow;
+  font-size: 30px;
 }
 
 .button:hover,
