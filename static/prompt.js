@@ -19,6 +19,7 @@ const converter = new showdown.Converter({ extensions: ['only-inline-stuff'], st
 
 const promptForm = document.getElementById("prompt-form");
 const submitButton = document.getElementById("submit-button");
+const importButton = document.getElementById("import-button");
 const questionButton = document.getElementById("question-button");
 const messagesContainer = document.getElementById("messages-container");
 
@@ -90,3 +91,45 @@ const handleQuestionClick = async (event) => {
 };
 
 questionButton.addEventListener("click", handleQuestionClick);
+
+const handleImportClick = () => {
+  // Create an input element dynamically
+  const inputElement = document.createElement("input");
+  inputElement.type = "file";
+  inputElement.accept = "application/pdf"; // Only accept PDF files
+
+  // Trigger the file selection dialog
+  inputElement.click();
+
+  // Listen for file selection
+  inputElement.addEventListener("change", async () => {
+    const file = inputElement.files[0];
+    if (file) {
+      console.log("Selected file:", file.name);
+
+      // Create a FormData object and append the selected file
+      const formData = new FormData();
+      formData.append("file", file);
+
+      try {
+        // Send the file to the API
+        const response = await fetch("/file", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          appendAIMessage(() => Promise.resolve(`File uploaded successfully: ${result.response}`));
+        } else {
+          appendAIMessage(() => Promise.resolve("Failed to upload the file."));
+        }
+      } catch (error) {
+        console.error("Error uploading the file:", error);
+        appendAIMessage(() => Promise.resolve("An error occurred during the file upload."));
+      }
+    }
+  });
+}
+
+importButton.addEventListener("click", handleImportClick);

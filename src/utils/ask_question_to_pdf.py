@@ -76,8 +76,8 @@ discussion = [
     {
         "role": "system",
         "content": "Tu es un assistant qui aide à comprendre le contenu d'une certaine "
-        "documentation. Voici la documentation à laquelle tu as accès et pour "
-        "laquelle tu dois aider : " + document,
+                   "documentation. Voici la documentation à laquelle tu as accès et pour "
+                   "laquelle tu dois aider : " + document,
     }
 ]
 
@@ -88,3 +88,18 @@ def ask_question_to_pdf(request):
     message = response.choices[0].message.content
     discussion.append({"role": "assistant", "content": message})
     return message
+
+
+def initialize_session():
+    global document
+    filename = os.path.join(os.path.dirname(__file__), "../../document.pdf")
+    document = read_pdf(filename)
+    discussion.clear()
+    discussion.append(
+        {
+            "role": "system",
+            "content": "Tu es un assistant qui aide à comprendre le contenu d'une certaine "
+                       "documentation. Voici la documentation à laquelle tu as accès et pour "
+                       "laquelle tu dois aider : " + document,
+        }
+    )
