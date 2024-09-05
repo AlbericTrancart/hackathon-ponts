@@ -15,7 +15,7 @@ showdown.extension('only-inline-stuff', function () {
   }];
 });  // To remove paragraph boxes
 
-const converter = new showdown.Converter({ extensions: ['only-inline-stuff'], strikethrough: true });  // To convert .md from GTP into .html
+const converter = new showdown.Converter({ extensions: ['only-inline-stuff'], strikethrough: true, disableForced4SpacesIndentedSublists: true });  // To convert .md from GTP into .html
 
 const promptForm = document.getElementById("prompt-form");
 const submitButton = document.getElementById("submit-button");
@@ -25,7 +25,7 @@ const messagesContainer = document.getElementById("messages-container");
 const appendHumanMessage = (message) => {
   const humanMessageElement = document.createElement("div");
   humanMessageElement.classList.add("message", "message-human");
-  humanMessageElement.innerHTML = message;
+  humanMessageElement.innerHTML = converter.makeHtml(message);
   messagesContainer.appendChild(humanMessageElement);
 };
 
