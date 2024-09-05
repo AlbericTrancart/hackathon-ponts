@@ -7,10 +7,11 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 
-<body>
+<body class="light-mode">
   <main class="main-container">
     <header class="header">
-      <h1 class="header-title">Mon A.I.de mémoire</h1>
+      <h1 class="header-title">Mon A.I. de mémoire</h1>
+      <button id="toggle-mode" style="position: relative; top: -15px;">Mode Sombre</button>
     </header>
 
     <section id="messages-container" class="messages-container">
