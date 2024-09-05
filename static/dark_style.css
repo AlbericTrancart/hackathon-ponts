@@ -130,12 +130,12 @@ li {
   border: 1px solid var(--border-color);
   padding: 5px;
   border-radius: 5px;
-  background-color: var(--main-background-color);
+  background-color: var(--border-color);
 }
 
 .button:hover,
 .button:active {
-  background-color: var(--body-background-color);
+  background-color: var(--border-color);
   cursor: pointer;
 }
 

@@ -12,6 +12,7 @@ const B_Button = document.getElementById("response-B");
 const C_Button = document.getElementById("response-C");
 
 const televerse = document.getElementById("televerse");
+const reinitialise = document.getElementById("reinitialise");
 
 const appendHumanMessage = (message) => {
   const humanMessageElement = document.createElement("div");
@@ -211,4 +212,14 @@ const handle_nv_cours = async (event) => {
 };
 
 nvcoursButton.addEventListener("click", handle_nv_cours);
+
+const handleReinitialise = async (event) => {
+  const response = await fetch("/reini", {
+    method: "GET",
+  });
+  console.log(response)
+};
+
+
+reinitialise.addEventListener("click", handleReinitialise);
 

@@ -1,6 +1,7 @@
 from flask import render_template
 from flask import Flask
 from flask import request, jsonify
+import shutil
 from src.utils.ask_question_to_pdf import (
     gpt3_completion,
     validate_answer,
@@ -109,3 +110,12 @@ def uploading(given_text=new_text):
 
     # add_information_historic(chunks)
     return jsonify({"message": "File uploaded successfully"}), 200
+
+
+@app.route("/reini", methods=["GET"])
+def reini(given_text=repC):
+    # print("okok")
+    shutil.copyfile("src/utils/ponts.pdf", "src/utils/filename.pdf")
+    for k in split_text(read_pdf("src/utils/ponts.pdf")):
+        add_information_historic(k)
+    return jsonify({"message": "reini successfully"}), 200
