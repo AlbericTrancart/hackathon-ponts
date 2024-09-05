@@ -11,17 +11,7 @@ app = Flask(__name__)
 
 
 text = """pose moi une nouvelle question sur le
-    texte sur les ponts-et-chaussées !"""
-
-qcm = """pose moi un unique question à 3 choix de réponses
-    sur le texte sur les ponts-et-chaussées sans donner la réponse"""
-
-repA = """je choisis la reponse A a la question précedente, vérifie
-en répondant d'abord par vrai ou faux puis la bonne reponse"""
-repB = """je choisis la reponse B a la question précedente, vérifie
-en répondant d'abord par vrai ou faux puis la bonne reponse"""
-repC = """je choisis la reponse C a la question précedente, vérifie
-en répondant d'abord par vrai ou faux puis la bonne reponse"""
+    texte sur le dernier cours que tu as appris !"""
 
 
 @app.route("/")
@@ -44,10 +34,6 @@ def give_question(given_text=text):
 @app.route("/prompt", methods=["POST"])
 def return_prompt():
     input = request.form["prompt"]
-    add_information_historic(
-        """Vérifie que le prochain message est en rapport avec le texte du
-        l'Ecole des Ponts"""
-    )
     answer = gpt3_completion(input)
     return {"answer": answer}
 
@@ -55,33 +41,13 @@ def return_prompt():
 @app.route("/answer", methods=["POST"])
 def return_answer():
     input = request.form["prompt"]
-    add_information_historic(
-        """Vérifie que le prochain message est en rapport avec le texte du
-        l'Ecole des Ponts"""
-    )
     answer = validate_answer(input)
     return {"answer": answer}
 
 
-@app.route("/qcm", methods=["GET"])
-def give_qcm(given_text=qcm):
-    answer = gpt3_completion(given_text)
-    return {"answer": answer}
-
-
-@app.route("/repA", methods=["GET"])
-def reponseA(given_text=repA):
-    answer = gpt3_completion(given_text)
-    return {"answer": answer}
-
-
-@app.route("/repB", methods=["GET"])
-def reponseB(given_text=repB):
-    answer = gpt3_completion(given_text)
-    return {"answer": answer}
-
-
-@app.route("/repC", methods=["GET"])
-def reponseC(given_text=repC):
-    answer = gpt3_completion(given_text)
+@app.route("/cours", methods=["GET"])
+def give_new_course():
+    answer = gpt3_completion(
+        """Demande à l'utilisateur d'envoyer le cours sur lequel il a des questions ou il veut que tu l'interroges. Quand il a envoyé le texte ne répond pas à son message mais attend qu'il te pose une question"""
+    )
     return {"answer": answer}

@@ -5,6 +5,7 @@ const messagesContainer = document.getElementById("messages-container");
 const enregistre = document.getElementById("enregistre");
 const dark_mode = document.getElementById("change_style");
 const qcmButton = document.getElementById("qcm-button");
+const nvcoursButton = document.getElementById("nv_cours");
 
 const A_Button = document.getElementById("response-A");
 const B_Button = document.getElementById("response-B");
@@ -183,3 +184,21 @@ const handleC = async (event) => {
 A_Button.addEventListener("click", handleA);
 B_Button.addEventListener("click", handleB);
 C_Button.addEventListener("click", handleC);
+
+const handle_nv_cours = async (event) => {
+  appendAIMessage(async () => {
+    const response = await fetch("/cours", {
+      method: "GET",
+    });
+    const result = await response.json();
+    const cours = result.answer;
+
+    questionButton.dataset.cours = cours;
+    questionButton.classList.add("hidden");
+
+
+    return cours;
+  });
+};
+
+nvcoursButton.addEventListener("click", handle_nv_cours);
