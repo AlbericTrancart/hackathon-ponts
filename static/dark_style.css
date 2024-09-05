@@ -12,6 +12,7 @@
   box-sizing: border-box;
 }
 
+
 body {
   background-color: var(--body-background-color);
   padding: 0;
@@ -52,6 +53,7 @@ li {
   margin-bottom: 30px;
 }
 
+
 .message {
   border: 1px solid var(--border-color);
   border-radius: 5px;
@@ -76,6 +78,13 @@ li {
   border-top: 1px solid var(--border-color);
 }
 
+.message:hover,
+.message:active {
+  background-color: var(--body-background-color);
+  cursor: text;
+}
+
+
 .qcm-container {
   position: fixed;
   bottom: 0px;
@@ -85,7 +94,25 @@ li {
   display: flex;
   align-items: center;
   background-color: var(--main-background-color);
-  margin-bottom: 500px;
+}
+
+.qcm-block {
+  margin-left: 100px;
+  display: block;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.save-container {
+  position: fixed;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--max-body-width);
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  border-top: 1px solid var(--border-color);
 }
 
 .prompt-label {
@@ -103,7 +130,7 @@ li {
   border: 1px solid var(--border-color);
   padding: 5px;
   border-radius: 5px;
-  background-color: var(--border-color);
+  background-color: var(--main-background-color);
 }
 
 .button:hover,
@@ -111,6 +138,12 @@ li {
   background-color: var(--body-background-color);
   cursor: pointer;
 }
+
+.w3-sidebar {
+  position: fixed;
+}
+
+
 
 .hidden {
   display: none;
@@ -133,11 +166,6 @@ li {
   background-color: var(--main-color);
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
-
-.w3-sidebar {
-  position: fixed;
-}
-
 
 .loader div:nth-child(1) {
   left: calc(var(--loader-bullet-size) * 0.5);

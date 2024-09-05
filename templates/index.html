@@ -18,6 +18,9 @@
       <li><button type="button" class="button" id="enregistre">
           Enregistre
         </button>
+      <li><button type="button" class="button" id="televerse">
+          Téléverse
+        </button>
     </ul>
   </div>
   <div class="w3-sidebar">
@@ -67,9 +70,12 @@
       </button>
       <button type="button" class="button" id="response-C" hidden="hidden">
         C
-    </button>
+      </button>
     </div>
     </form>
+
+    <input type="file" id="fileInput" accept=".pdf" style="display: none;" />
+
     <script src="{{ url_for('static', filename='prompt.js') }}"></script>
     <script>
       document.getElementById("mySidebar").style.display = "none";
@@ -82,6 +88,41 @@
         document.getElementById("mySidebar").style.display = "none";
         document.getElementById("menubutton").style.display = "block";
       }
+
+      // Répond au boutton "téléverse"
+      document.getElementById('televerse').addEventListener('click', function () {
+        // Trigger the hidden file input
+        document.getElementById('fileInput').click();
+      });
+
+      // Modifie le fichier original en le nouveau fichier
+      document.getElementById('fileInput').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+
+        // Vérifie que c'est un pdf
+        if (file && file.type === 'application/pdf') {
+          // Create a FormData object to upload the file
+          const formData = new FormData();
+          formData.append('file', file);
+
+          // Envoie le fichier a main.py
+          fetch('/upload', {
+            method: 'POST',
+            body: formData
+          })
+            .then(response => response.json())
+            .then(data => {
+              // Réponse du main.py
+              alert('Fichier téléversé correctement');
+            })
+            .catch(error => {
+              console.error('Error uploading file:', error);
+              alert('Erreur de téléversement');
+            });
+        } else {
+          alert('Please select a file named "filename.pdf".');
+        }
+      });
     </script>
   </main>
 </body>

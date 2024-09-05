@@ -77,6 +77,13 @@ li {
   border-top: 1px solid var(--border-color);
 }
 
+.message:hover,
+.message:active {
+  background-color: var(--body-background-color);
+  cursor: text;
+}
+
+
 .qcm-container {
   position: fixed;
   bottom: 0px;

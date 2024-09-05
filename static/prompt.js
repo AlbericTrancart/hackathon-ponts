@@ -10,6 +10,8 @@ const A_Button = document.getElementById("response-A");
 const B_Button = document.getElementById("response-B");
 const C_Button = document.getElementById("response-C");
 
+const televerse = document.getElementById("televerse");
+
 const appendHumanMessage = (message) => {
   const humanMessageElement = document.createElement("div");
   humanMessageElement.classList.add("message", "message-human");
@@ -183,3 +185,9 @@ const handleC = async (event) => {
 A_Button.addEventListener("click", handleA);
 B_Button.addEventListener("click", handleB);
 C_Button.addEventListener("click", handleC);
+
+
+const handleUpload = async (event) => {
+};
+
+televerse.addEventListener("click", handleUpload);

@@ -1,10 +1,13 @@
+import os
 from flask import render_template
 from flask import Flask
-from flask import request
+from flask import request, jsonify
 from src.utils.ask_question_to_pdf import (
     gpt3_completion,
     validate_answer,
     add_information_historic,
+    read_pdf,
+    split_text,
 )
 
 app = Flask(__name__)
@@ -12,6 +15,9 @@ app = Flask(__name__)
 
 text = """pose moi une nouvelle question sur le
     texte sur les ponts-et-chaussées !"""
+
+new_text = """a partir de maintenant tu réactualise
+    ton texte via les messages précedent"""
 
 qcm = """pose moi un unique question à 3 choix de réponses
     sur le texte sur les ponts-et-chaussées sans donner la réponse"""
@@ -85,3 +91,19 @@ def reponseB(given_text=repB):
 def reponseC(given_text=repC):
     answer = gpt3_completion(given_text)
     return {"answer": answer}
+
+
+@app.route("/upload", methods=["POST"])
+def uploading(given_text=new_text):
+    if "file" not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
+
+    file = request.files["file"]
+    file.save("src/utils/filename.pdf")
+
+    filename = os.path.join(os.path.dirname(__file__), "src/utils/filename.pdf")
+    document = read_pdf(filename)
+    chunks = split_text(document)
+
+    gpt3_completion(given_text)
+    return jsonify({"message": "File uploaded successfully"}), 200
