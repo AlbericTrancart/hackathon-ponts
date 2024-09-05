@@ -19,3 +19,5 @@ You can deactivate the environment with `deactivate`.
 
 if you need to use a new librairies, you can do it with pip
 `pip install [library name]` or `pip3 install [library name]`
+
+Lien du notion : https://m33.notion.site/Projet-Web-Python-ENPC-2024-ded99a2530e041cf921321cb696db202
