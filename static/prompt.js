@@ -254,4 +254,14 @@ const handleNouvellePage = async (event) => {
   //console.log('retrievedObject: ', JSON.parse(retrievedObject));
 };
 
+function addtoconv(convstring, message) {
+  const conversation = localStorage.getItem(convstring);
+  let convlist = JSON.parse(conversation);
+  console.log(typeof (convlist));
+  convlist.push(message);
+  const newconvstring = JSON.stringify(convlist);
+  localStorage.setItem(newconvstring);
+
+}
+
 nouvelle.addEventListener("click", handleNouvellePage);
