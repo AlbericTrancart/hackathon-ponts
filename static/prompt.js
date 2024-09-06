@@ -16,12 +16,41 @@ const reinitialise = document.getElementById("reinitialise");
 const nouvelle = document.getElementById("page");
 
 
+
+
+
+
+
+const callconv = async () => {
+  const response = await fetch("/new", {
+    method: "GET",
+  });
+  const result = await response.json();
+  const resultat = result.conv
+
+  const updatedresult = resultat;
+  localStorage.setItem('1', updatedresult);
+  console.log(updatedresult);
+}
+
+
+
+
+
 const appendHumanMessage = (message) => {
   const humanMessageElement = document.createElement("div");
   humanMessageElement.classList.add("message", "message-human");
   humanMessageElement.innerHTML = message;
   messagesContainer.appendChild(humanMessageElement);
 };
+
+const appendlikeAIMessage = (message) => {
+  const humanMessageElement = document.createElement("div");
+  humanMessageElement.classList.add("message");
+  humanMessageElement.innerHTML = message;
+  messagesContainer.appendChild(humanMessageElement);
+};
+
 
 const appendAIMessage = async (messagePromise) => {
   // Add a loader to the interface
@@ -38,6 +67,7 @@ const appendAIMessage = async (messagePromise) => {
   loaderElement.classList.remove("loader");
   loaderElement.innerHTML = messageToAppend;
 };
+
 
 const handlePrompt = async (event) => {
   event.preventDefault();
@@ -60,13 +90,19 @@ const handlePrompt = async (event) => {
 
   appendHumanMessage(data.get("prompt"));
 
+  addtoconv('1', { "role": "user", "content": data.get("prompt") });
+
+
   await appendAIMessage(async () => {
     const response = await fetch(url, {
       method: "POST",
       body: data,
     });
     const result = await response.json();
+    convnum = result.convnumber;
+    addtoconv(convnum, { "role": "assistant", "content": result.answer });
     return result.answer;
+
   });
 };
 
@@ -81,7 +117,7 @@ const handleQuestionClick = async (event) => {
     const question = result.answer;
     const convnum = result.convnumber;
 
-    addtoconv(convnum, question);
+    addtoconv(convnum, { "role": "assistant", "content": question });
 
     questionButton.dataset.question = question;
     questionButton.classList.add("hidden");
@@ -118,6 +154,10 @@ const handleQCM = async (event) => {
     });
     const result = await response.json();
     const question = result.answer;
+    const convnum = result.convnumber;
+
+    addtoconv(convnum, { "role": "assistant", "content": question });
+
 
     questionButton.dataset.question = question;
     questionButton.classList.remove("hidden");
@@ -143,7 +183,9 @@ const handleA = async (event) => {
     });
     const result = await response.json();
     const question = result.answer;
+    const convnum = result.convnumber;
 
+    addtoconv(convnum, { "role": "assistant", "content": question });
     questionButton.dataset.question = question;
     questionButton.classList.remove("hidden");
     submitButton.innerHTML = "Message";
@@ -161,6 +203,9 @@ const handleB = async (event) => {
     });
     const result = await response.json();
     const question = result.answer;
+    const convnum = result.convnumber;
+
+    addtoconv(convnum, { "role": "assistant", "content": question });
 
     questionButton.dataset.question = question;
     questionButton.classList.remove("hidden");
@@ -179,6 +224,9 @@ const handleC = async (event) => {
     });
     const result = await response.json();
     const question = result.answer;
+    const convnum = result.convnumber;
+
+    addtoconv(convnum, { "role": "assistant", "content": question });
 
     questionButton.dataset.question = question;
     questionButton.classList.remove("hidden");
@@ -209,6 +257,9 @@ const handle_nv_cours = async (event) => {
     });
     const result = await response.json();
     const cours = result.answer;
+    const convnum = result.convnumber;
+
+    addtoconv(convnum, question);
 
     questionButton.dataset.cours = cours;
     questionButton.classList.add("hidden");
@@ -241,7 +292,7 @@ const handleNouvellePage = async (event) => {
       messages[i].remove();
     }
   }
-
+  localStorage.removeItem('1');
   const response = await fetch("/new", {
     method: "GET",
   });
@@ -269,6 +320,22 @@ function addtoconv(convstring, message) {
   const newconvstring = JSON.stringify(convlist);
   localStorage.setItem(convstring, newconvstring);
 
+}
+
+let conversation = localStorage.getItem('1');
+if (conversation == null) {
+  callconv();
+}
+else {
+  convlist = JSON.parse(conversation)
+  convlist.forEach((dico) => {
+    if (dico.role === "user") {
+      appendHumanMessage(dico.content);
+    }
+    if (dico.role === "assistant") {
+      appendlikeAIMessage(dico.content)
+    }
+  });
 }
 
 nouvelle.addEventListener("click", handleNouvellePage);

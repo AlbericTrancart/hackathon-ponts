@@ -2,6 +2,7 @@ from flask import render_template
 from flask import Flask
 from flask import request, jsonify
 import shutil
+import json
 from src.utils.ask_question_to_pdf import (
     gpt3_completion,
     validate_answer,
@@ -144,6 +145,9 @@ def uploadingTXT(given_text=new_text):
 def nouvellePage(given_text=repC):
     # print("ok")
     old_discussion = old_convo()
+
+    old_discussion = json.dumps(old_discussion)
+    print(old_discussion)
     clear_discussion()
     # print(type(jsonify({"conv": old_discussion})))
-    return jsonify({"conv": old_discussion}), 200
+    return jsonify({"conv": old_discussion})
