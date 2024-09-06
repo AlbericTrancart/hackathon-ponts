@@ -61,6 +61,22 @@ const handlePrompt = async (event) => {
     submitButton.innerHTML = "Message";
   }
 
+  //Easter egg logo
+
+  const textInput = data.get("prompt");
+  const image = document.getElementById('logo');
+  const image1 = document.getElementById('logo1');
+
+  if (textInput.includes('meilleur club')) {
+      image.style.display = 'block';
+      image1.style.display = 'block';
+  } else {
+      image.style.display = 'none';
+      image1.style.display = 'none';
+  }
+
+  //
+
   appendHumanMessage(data.get("prompt"));
 
   await appendAIMessage(async () => {
@@ -159,3 +175,17 @@ const handleImportClick = () => {
 
 importButton.addEventListener("click", handleImportClick);
 
+//Ecouteur d'événement pour afficher le logo du club
+
+document.addEventListener('DOMContentLoaded', () => {
+  const textInput = document.getElementById("prompt-form");
+  const image = document.getElementById('logo');
+
+  textInput.addEventListener('input', () => {
+      if (textInput.includes('meilleur club')) {
+          image.style.display = 'block';
+      } else {
+          image.style.display = 'none';
+      }
+  });
+});

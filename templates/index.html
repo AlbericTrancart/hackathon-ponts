@@ -14,7 +14,6 @@
     <header class="header">
       <h1 class="header-title">Mon A.I. de mémoire</h1>
     </header>
-
     <section id="messages-container" class="messages-container">
       <div class="message message-ai">
         Je suis ton AIssistant de cours personnel ! Pose-moi une question sur
@@ -23,7 +22,7 @@
     </section>
 
     <form id="prompt-form" class="prompt-container">
-      <img src="hackathon-ponts-1\templates\Images\Logo_club.png" alt="Logo du meilleur club des Ponts" width="100" height="100">
+      <img src="{{ url_for('static', filename='Logo_club.png') }}" alt="Logo du meilleur club des Ponts" id="logo" width="200" height="200">
       <label for="prompt" class="prompt-label">Message</label>
 
       <input type="text" id="prompt" name="prompt" class="prompt-input" autocomplete="off" />
