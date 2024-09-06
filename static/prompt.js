@@ -2,8 +2,8 @@ const promptForm = document.getElementById("prompt-form");
 const submitButton = document.getElementById("submit-button");
 const questionButton = document.getElementById("question-button");
 const messagesContainer = document.getElementById("messages-container");
-const jrperronnet = document.getElementById("perronnet");
-const lucdormieux = document.getElementById("dormieux")
+const jrperronnet = document.getElementById("perronnet-button");
+const lucdormieux = document.getElementById("dormieux-button")
 
 const appendHumanMessage = (message) => {
   const humanMessageElement = document.createElement("div");
