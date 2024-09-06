@@ -43,12 +43,22 @@ const handlePrompt = async (event) => {
     submitButton.innerHTML = "Message";
   }
   if (jrperronnet.dataset.question !== undefined) {
-    url = "/answer";
-    data.append("question", questionButton.dataset.question);
-    delete questionButton.dataset.question;
-    questionButton.classList.remove("hidden");
+    url = "/perro2";
+    data.append("question", jrperronnet.dataset.question);
+    delete jrperronnet.dataset.question;
+    jrperronnet.classList.remove("hidden");
     submitButton.innerHTML = "Message";
   }
+  if (lucdormieux.dataset.question !== undefined) {
+    url = "/dormieux2";
+    data.append("question", lucdormieux.dataset.question);
+    delete lucdormieux.dataset.question;
+    lucdormieux.classList.remove("hidden");
+    submitButton.innerHTML = "Message";
+  }
+  
+
+  
 
   appendHumanMessage(data.get("prompt"));
 
@@ -79,4 +89,36 @@ const handleQuestionClick = async (event) => {
   });
 };
 
+const handleQuestionClick2 = async (event) => {
+  appendAIMessage(async () => {
+    const response = await fetch("/perro", {
+      method: "GET",
+    });
+    const result = await response.json();
+    const question = result.answer;
+
+    jrperronnet.dataset.question = question;
+    jrperronnet.classList.add("hidden");
+    submitButton.innerHTML = "Répondre à la question";
+    return question;
+  });
+};
+
+const handleQuestionClick3 = async (event) => {
+  appendAIMessage(async () => {
+    const response = await fetch("/dormieux", {
+      method: "GET",
+    });
+    const result = await response.json();
+    const question = result.answer;
+
+    lucdormieux.dataset.question = question;
+    lucdormieux.classList.add("hidden");
+    submitButton.innerHTML = "Répondre à la question";
+    return question;
+  });
+};
+
 questionButton.addEventListener("click", handleQuestionClick);
+jrperronnet.addEventListener("click", handleQuestionClick);
+lucdormieux.addEventListener("click", handleQuestionClick);
