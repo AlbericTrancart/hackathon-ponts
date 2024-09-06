@@ -16,6 +16,8 @@ def open_file(filepath):
 openai.api_key = os.getenv("OPENAI_API_KEY")
 openai.organization = os.getenv("OPENAI_ORGANIZATION")
 
+message_history = []
+
 
 def read_pdf(filename):
     context = ""
@@ -69,3 +71,21 @@ def split_text(text, chunk_size=5000):
 filename = os.path.join(os.path.dirname(__file__), "filename.pdf")
 document = read_pdf(filename)
 chunks = split_text(document)
+
+message_history.append({"role": "user", "content": chunks[0]})
+
+
+def gpt3_completion(prompt_user, model="gpt-3.5-turbo", max_tokens=450):
+    global message_history
+
+    message_history.append({"role": "user", "content": prompt_user})
+
+    response = openai.ChatCompletion.create(
+        model=model, messages=message_history, max_tokens=max_tokens
+    )
+
+    model_response = response.choices[0].message["content"].strip()
+
+    message_history.append({"role": "assistant", "content": model_response})
+
+    return model_response
