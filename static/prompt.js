@@ -15,6 +15,7 @@ const televerse = document.getElementById("televerse");
 const reinitialise = document.getElementById("reinitialise");
 const nouvelle = document.getElementById("page");
 
+
 const appendHumanMessage = (message) => {
   const humanMessageElement = document.createElement("div");
   humanMessageElement.classList.add("message", "message-human");
@@ -78,6 +79,9 @@ const handleQuestionClick = async (event) => {
     });
     const result = await response.json();
     const question = result.answer;
+    const convnum = result.convnumber;
+
+    addtoconv(convnum, question);
 
     questionButton.dataset.question = question;
     questionButton.classList.add("hidden");
@@ -255,12 +259,15 @@ const handleNouvellePage = async (event) => {
 };
 
 function addtoconv(convstring, message) {
-  const conversation = localStorage.getItem(convstring);
+  let conversation = localStorage.getItem(convstring);
+  if (conversation == null) {
+    conversation = JSON.stringify([]);
+  }
   let convlist = JSON.parse(conversation);
   console.log(typeof (convlist));
   convlist.push(message);
   const newconvstring = JSON.stringify(convlist);
-  localStorage.setItem(newconvstring);
+  localStorage.setItem(convstring, newconvstring);
 
 }
 

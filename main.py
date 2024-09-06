@@ -9,11 +9,13 @@ from src.utils.ask_question_to_pdf import (
     read_pdf,
     split_text,
     old_convo,
-    clear_discussion
+    clear_discussion,
 )
 
 app = Flask(__name__)
 
+
+convnum = "1"
 
 text = """pose moi une nouvelle question sur le
     texte sur le dernier cours que tu as appris !"""
@@ -46,45 +48,45 @@ def hello(name=None):
 @app.route("/question", methods=["GET"])
 def give_question(given_text=text):
     answer = gpt3_completion(given_text)
-    return {"answer": answer}
+    return {"answer": answer, "convnumber": convnum}
 
 
 @app.route("/prompt", methods=["POST"])
 def return_prompt():
     input = request.form["prompt"]
     answer = gpt3_completion(input)
-    return {"answer": answer}
+    return {"answer": answer, "convnumber": convnum}
 
 
 @app.route("/answer", methods=["POST"])
 def return_answer():
     input = request.form["prompt"]
     answer = validate_answer(input)
-    return {"answer": answer}
+    return {"answer": answer, "convnumber": convnum}
 
 
 @app.route("/qcm", methods=["GET"])
 def give_qcm(given_text=qcm):
     answer = gpt3_completion(given_text)
-    return {"answer": answer}
+    return {"answer": answer, "convnumber": convnum}
 
 
 @app.route("/repA", methods=["GET"])
 def reponseA(given_text=repA):
     answer = gpt3_completion(given_text)
-    return {"answer": answer}
+    return {"answer": answer, "convnumber": convnum}
 
 
 @app.route("/repB", methods=["GET"])
 def reponseB(given_text=repB):
     answer = gpt3_completion(given_text)
-    return {"answer": answer}
+    return {"answer": answer, "convnumber": convnum}
 
 
 @app.route("/repC", methods=["GET"])
 def reponseC(given_text=repC):
     answer = gpt3_completion(given_text)
-    return {"answer": answer}
+    return {"answer": answer, "convnumber": convnum}
 
 
 @app.route("/cours", methods=["GET"])
@@ -96,7 +98,7 @@ def give_new_course():
           Quand il a envoyé le texte ne répond
           pas à son message mais attend qu'il te pose une question"""
     )
-    return {"answer": answer}
+    return {"answer": answer, "convnumber": convnum}
 
 
 @app.route("/upload", methods=["POST"])
