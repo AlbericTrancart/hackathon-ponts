@@ -6,6 +6,7 @@
   --border-color: #cccccc;
   --secondary-color: #fff6d3;
   --loader-bullet-size: 6px;
+  --dark-main-color: #2a303b;
   --dark-body-background-color: #333333;
   --dark-main-background-color: #1e1e1e;
   --dark-main-color: #e0e0e0;
@@ -42,6 +43,7 @@ body.dark-mode {
 
 body.dark-mode .main-container {
   background-color: var(--dark-main-background-color);
+  color: var(--dark-main-color);
 }
 
 .header {
@@ -117,6 +119,7 @@ body.dark-mode .prompt-input {
 body.dark-mode .button {
   border: 1px solid var(--dark-border-color);
   background-color: var(--dark-main-background-color);
+  color: var(--dark-main-color);
 }
 
 .button:hover,
