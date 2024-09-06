@@ -241,7 +241,8 @@ const handleNouvellePage = async (event) => {
   const response = await fetch("/new", {
     method: "GET",
   });
-  //console.log(response)
+  //const result = await response.json();
+  //console.log(typeof(result))
   //var testObject = { 'one': 1, 'two': 2, 'three': 3 };
   //console.log(response["message"])
   // Put the object into storage

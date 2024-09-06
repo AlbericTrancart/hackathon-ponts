@@ -143,4 +143,5 @@ def nouvellePage(given_text=repC):
     # print("ok")
     old_discussion = old_convo()
     clear_discussion()
-    return jsonify({"conv": old_discussion}),200
+    # print(type(jsonify({"conv": old_discussion})))
+    return jsonify({"conv": old_discussion}), 200

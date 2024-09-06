@@ -127,7 +127,7 @@ def old_convo():
 
 
 def clear_discussion():
-    #print(discussion)
+    # print(discussion)
     discussion.clear()
     discussion.append({
         "role": "system",
@@ -136,4 +136,4 @@ def clear_discussion():
     })
     for k in split_text(read_pdf("src/utils/ponts.pdf")):
         discussion.append({"role": "system", "content": k})
-    #print(discussion)
+    # print(discussion)
