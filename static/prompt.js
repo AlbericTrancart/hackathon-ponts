@@ -2,6 +2,8 @@ const promptForm = document.getElementById("prompt-form");
 const submitButton = document.getElementById("submit-button");
 const questionButton = document.getElementById("question-button");
 const messagesContainer = document.getElementById("messages-container");
+const jrperronnet = document.getElementById("perronnet");
+const lucdormieux = document.getElementById("dormieux")
 
 const appendHumanMessage = (message) => {
   const humanMessageElement = document.createElement("div");
@@ -34,6 +36,13 @@ const handlePrompt = async (event) => {
 
   let url = "/prompt";
   if (questionButton.dataset.question !== undefined) {
+    url = "/answer";
+    data.append("question", questionButton.dataset.question);
+    delete questionButton.dataset.question;
+    questionButton.classList.remove("hidden");
+    submitButton.innerHTML = "Message";
+  }
+  if (jrperronnet.dataset.question !== undefined) {
     url = "/answer";
     data.append("question", questionButton.dataset.question);
     delete questionButton.dataset.question;
