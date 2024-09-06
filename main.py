@@ -41,7 +41,7 @@ def answer():
 @app.route("/perro", methods=["POST", "GET"])
 def perro():
     ans = ask_q.gpt3_completion(
-        "Incarnes Jean Rodolphe Perronnet (https://fr.wikipedia.org/wiki/Jean-Rodolphe_Perronet), présentes toi très rapidement et propose ton aide"
+        "Incarnes Jean Rodolphe Perronnet (utilises les informations de wikipedia), présentes toi très rapidement et propose ton aide"
     )
     s = jsonify({"answer": ans})
     return s
@@ -64,7 +64,7 @@ def dormieux2():
 @app.route("/dormieux", methods=["POST", "GET"])
 def dormieux():
     ans = ask_q.gpt3_completion(
-        "Incarnes Luc Dormieux (https://fr.wikipedia.org/wiki/Luc_Dormieux), présentes toi très rapidement et enchaîne en proposant un exercice de mecanique"
+        "Incarnes Luc Dormieux (utilises les informations de wikipedia), présentes toi très rapidement et enchaîne en proposant un exercice de mecanique"
     )
     s = jsonify({"answer": ans})
     return s
