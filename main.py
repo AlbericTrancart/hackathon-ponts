@@ -37,6 +37,7 @@ def answer():
     s = jsonify({"answer": ans})
     return s
 
+
 @app.route("/perro", methods=["POST", "GET"])
 def perro():
     ans = ask_q.gpt3_completion(
