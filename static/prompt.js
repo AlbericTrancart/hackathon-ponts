@@ -13,6 +13,7 @@ const C_Button = document.getElementById("response-C");
 
 const televerse = document.getElementById("televerse");
 const reinitialise = document.getElementById("reinitialise");
+const nouvelle = document.getElementById("page");
 
 const appendHumanMessage = (message) => {
   const humanMessageElement = document.createElement("div");
@@ -225,3 +226,31 @@ const handleReinitialise = async (event) => {
 
 reinitialise.addEventListener("click", handleReinitialise);
 
+const handleNouvellePage = async (event) => {
+  //messagesContainer.innerHTML = "";
+  //document.getElementById("guide").innerHTML = "Je suis ton AIssistant de cours personnel ! Pose-moi une question sur le cours et je te répondrai."
+  const messages = messagesContainer.children;
+
+  // Loop through the children in reverse order to remove all except the guide element
+  for (let i = messages.length - 1; i >= 0; i--) {
+    if (messages[i].id !== "guide") {
+      messages[i].remove();
+    }
+  }
+
+  const response = await fetch("/new", {
+    method: "GET",
+  });
+  //console.log(response)
+  //var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+  //console.log(response["message"])
+  // Put the object into storage
+  //localStorage.setItem('testObject', JSON.stringify(response));
+
+  // Retrieve the object from storage
+  //var retrievedObject = localStorage.getItem('testObject');
+
+  //console.log('retrievedObject: ', JSON.parse(retrievedObject));
+};
+
+nouvelle.addEventListener("click", handleNouvellePage);

@@ -9,6 +9,9 @@
 </head>
 
 <body>
+  <button type="button" class="button" id="page" style="position: fixed;top: 110px;left: 1200px;">
+    Nouvelle page
+  </button>
   <div class="w3-sidebar w3-bar-block w3-collapse w3-card" style="width:200px;" id="mySidebar">
     <button class="w3-bar-item w3-button w3-hide-large button" onclick="w3_close()">&#10060;</button>
     <ul>
@@ -42,7 +45,7 @@
     </header>
 
     <section id="messages-container" class="messages-container">
-      <div class="message message-ai">
+      <div class="message message-ai" id="guide">
         Je suis ton AIssistant de cours personnel ! Pose-moi une question sur
         le cours et je te répondrai.
       </div>
@@ -149,5 +152,6 @@
     </script>
   </main>
 </body>
+
 
 </html>

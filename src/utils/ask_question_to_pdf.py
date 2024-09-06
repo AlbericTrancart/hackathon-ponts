@@ -119,3 +119,21 @@ def add_information_historic(information, role="user"):
             "content": information,
         }
     )
+
+
+# clear discussion memory and return the old one to put it in global memory
+def old_convo():
+    return discussion
+
+
+def clear_discussion():
+    #print(discussion)
+    discussion.clear()
+    discussion.append({
+        "role": "system",
+        "content": """Le prochain texte est le cours
+     qu'il faut apprendre""",
+    })
+    for k in split_text(read_pdf("src/utils/ponts.pdf")):
+        discussion.append({"role": "system", "content": k})
+    #print(discussion)

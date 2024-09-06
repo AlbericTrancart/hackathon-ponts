@@ -8,6 +8,8 @@ from src.utils.ask_question_to_pdf import (
     add_information_historic,
     read_pdf,
     split_text,
+    old_convo,
+    clear_discussion
 )
 
 app = Flask(__name__)
@@ -134,3 +136,11 @@ def uploadingTXT(given_text=new_text):
 
     # add_information_historic(chunks)
     return jsonify({"message": "File uploaded successfully"}), 200
+
+
+@app.route("/new", methods=["GET"])
+def nouvellePage(given_text=repC):
+    # print("ok")
+    old_discussion = old_convo()
+    clear_discussion()
+    return jsonify({"conv": old_discussion}),200

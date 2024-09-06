@@ -64,6 +64,7 @@ li {
   /*align-items: center;*/
   text-align: left;
   transition: var(--transition-duration);
+  /*max-width: 90%;*/
 }
 
 .message-human {
@@ -72,6 +73,7 @@ li {
   align-items: right;
   align-self: end;
   transition: var(--transition-duration);
+  max-width: 90%;
 }
 
 .prompt-container {
