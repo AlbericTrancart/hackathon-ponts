@@ -9,7 +9,7 @@
 }
 
 body {
-    background-image: url("https://tecnico.ulisboa.pt/files/2017/06/priberam-machine-learning-lunch-seminar-joao-xavier-1140x641.jpg");
+    background-image: url('https://tecnico.ulisboa.pt/files/2017/06/priberam-machine-learning-lunch-seminar-joao-xavier-1140x641.jpg');
     background-size: cover;
     /* L'image couvrira toute la page */
     background-position: center;
@@ -28,6 +28,8 @@ body {
     z-index: 10;
     /* Le bouton a une priorité plus élevée pour s'afficher au-dessus */
     position: relative;
+    color: #1a0f59;
+    /* Couleur du texte */
 }
 
 .header {
@@ -40,7 +42,7 @@ body {
 .header-title-front {
     position: absolute;
     /* On positionne le titre en fonction des propriétés top, right, bottom, left */
-    top: 22%;
+    top: 20%;
     /* Ajuste cette valeur pour déplacer le texte verticalement */
     left: 30%;
     /* Ajuste cette valeur pour déplacer le texte horizontalement */
