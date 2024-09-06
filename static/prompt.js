@@ -120,5 +120,5 @@ const handleQuestionClick3 = async (event) => {
 };
 
 questionButton.addEventListener("click", handleQuestionClick);
-jrperronnet.addEventListener("click", handleQuestionClick);
-lucdormieux.addEventListener("click", handleQuestionClick);
+jrperronnet.addEventListener("click", handleQuestionClick2);
+lucdormieux.addEventListener("click", handleQuestionClick3);
