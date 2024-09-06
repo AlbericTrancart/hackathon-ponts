@@ -99,7 +99,7 @@ const handleQuestionClick2 = async (event) => {
 
     jrperronnet.dataset.question = question;
     jrperronnet.classList.add("hidden");
-    submitButton.innerHTML = "Répondre à la question";
+    submitButton.innerHTML = "Réponse de JR Perronnet";
     return question;
   });
 };
@@ -114,7 +114,7 @@ const handleQuestionClick3 = async (event) => {
 
     lucdormieux.dataset.question = question;
     lucdormieux.classList.add("hidden");
-    submitButton.innerHTML = "Répondre à la question";
+    submitButton.innerHTML = "Réponse de Luc Dormieux";
     return question;
   });
 };
