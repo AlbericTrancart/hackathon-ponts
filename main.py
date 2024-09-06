@@ -50,11 +50,7 @@ def perro():
 @app.route("/perro2", methods=["POST", "GET"])
 def perro2():
     prompt = request.form["prompt"]
-    prompt = (
-        prompt
-        + "\n"
-        + "Réponds rapidement et relances la conversation"
-    )
+    prompt = prompt + "\n" + "Réponds rapidement et relances la conversation"
     ans = ask_q.gpt3_completion(prompt)
     s = jsonify({"answer": ans})
     return s
@@ -63,11 +59,7 @@ def perro2():
 @app.route("/dormieux2", methods=["POST", "GET"])
 def dormieux2():
     prompt = request.form["prompt"]
-    prompt = (
-        prompt
-        + "\n"
-        + "Réponds rapidement et relances la conversation"
-    )
+    prompt = prompt + "\n" + "Réponds rapidement et relances la conversation"
     ans = ask_q.gpt3_completion(prompt)
     s = jsonify({"answer": ans})
     return s
